@@ -26,7 +26,7 @@ $onmulti
 $onrecurse
 *$setglobal mip
 $if not set scen $setglobal scen base
-$if not set data $setglobal data utopia
+$if not set data $setglobal data baseenergysystem
 $if not set value $setglobal value ""
 $setglobal storage
 $include "Model/osemosys_dec.gms"
