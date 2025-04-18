@@ -405,7 +405,7 @@ parameter InputActivityRatio(r,t,f,m,y) /
   UTOPIA.TXG.GSL.1.(1990*2010)  1
 /;
 
-parameter OutputActivityRatio(r,t,f,m,y) /
+parameter c
   UTOPIA.COAL.ELC.1.(1990*2010)  1
   UTOPIA.NUCLEAR.ELC.1.(1990*2010)  1
   UTOPIA.ROR.ELC.1.(1990*2010)  1

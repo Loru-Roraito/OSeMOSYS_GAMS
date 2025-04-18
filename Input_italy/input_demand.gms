@@ -28,16 +28,18 @@ $elseif.ph %phase%=='data'
 *------------------------------------------------------------------------	
 * Parameters - Demands       
 *------------------------------------------------------------------------
-scalar fen_2025;
-fen_2025 = 1400; #TWh
 
-** italy: residential and commercial -> 26% + 12.5% OF FEN.
-** assume: 50% heating, 20% cooling, 30% lighting
-SpecifiedAnnualDemand(r,"RH","2025") = 0.38 * 0.5 * fen_2025;
-SpecifiedAnnualDemand(r,"RC","2025") = 0.38 * 0.2 * fen_2025;
-SpecifiedAnnualDemand(r,"RL","2025") = 0.38 * 0.3 * fen_2025;
-SpecifiedAnnualDemand(r,"IH","2025") = 0.21 * fen_2025;
-AccumulatedAnnualDemand(r,"TX","2025") = 0.33 * fen_2025;
+parameter SpecifiedAnnualDemand(r,f,y) /
+
+/;
+
+parameter AccumulatedAnnualDemand(r,f,y) /
+
+/;
+
+scalar fen_2025;
+fen_2025 = 0.001; #TWh
+
 
 parameter SpecifiedDemandProfile(r,f,l,y) /
   ITALY.RH.ID.(2025*2075)  .12
