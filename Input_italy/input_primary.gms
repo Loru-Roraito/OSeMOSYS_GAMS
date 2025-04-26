@@ -14,6 +14,7 @@ set     TECHNOLOGY      /
         VIR_WIN 'Virtual wind technology'
         VIR_GTH 'Virtual geothermal source'
         VIR_HYD 'Virtual hydro technology (ror)'
+        VIR_ICE 'Virtual ice technology'
         PRODWST 'Waste production'
 /;
 
@@ -27,9 +28,10 @@ set     FUEL    /
         SUN 'Solar energy'
         WIN 'Wind energy'
         HYD 'Hydro energy'
+        ICE 'Ice forming/melting'
 /;
 
-set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD /;
+set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD, ICE /;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=='data'
@@ -112,6 +114,14 @@ OperationalLife(r,'VIR_HYD') = 999;
 AvailabilityFactor(r,'VIR_HYD',y) = 1;
 ResidualCapacity(r,"VIR_HYD",y) = 999;
 
+CapitalCost(r,'VIR_ICE',y) = 0;
+VariableCost(r,'VIR_ICE',m,y) = 0; 
+FixedCost(r,'VIR_ICE',y) = 0;
+OperationalLife(r,'VIR_ICE') = 999;
+AvailabilityFactor(r,'VIR_ICE',y) = 1;
+ResidualCapacity(r,"VIR_ICE",y) = 999;
+TotalAnnualMaxCapacityInvestment(r,'VIR_ICE',y) = 0;
+
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=="popol"
 
@@ -119,6 +129,7 @@ OutputActivityRatio(r,'VIR_SUN','SUN',"1",y) = 1;
 OutputActivityRatio(r,'VIR_WIN','WIN',"1",y) = 1;
 OutputActivityRatio(r,'VIR_GTH','GTH',"1",y) = 1;
 OutputActivityRatio(r,'VIR_HYD','HYD',"1",y) = 1;
+OutputActivityRatio(r,'VIR_ICE','ICE',"1",y) = 1;
 
 OutputActivityRatio(r,'PRODWST','WST',"1",y) = 1;
 OutputActivityRatio(r,'IMPBIO1','WBM',"1",y) = 1;
