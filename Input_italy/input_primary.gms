@@ -29,14 +29,16 @@ set     FUEL    /
         WIN 'Wind energy'
         HYD 'Hydro energy'
         ICE 'Ice forming/melting'
+        ICE_MEL
+        ICE_PROD
 /;
 
-set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD, ICE /;
+set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD /;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=='data'
 
-*** characterize technologies
+*** characterize technologiess
 CapitalCost(r,'IMPDSL1',y) = 0;
 VariableCost(r,'IMPDSL1',m,y) = 50; # cost of diesel in $/MWh
 FixedCost(r,'IMPDSL1',y) = 0;
@@ -120,7 +122,6 @@ FixedCost(r,'VIR_ICE',y) = 0;
 OperationalLife(r,'VIR_ICE') = 999;
 AvailabilityFactor(r,'VIR_ICE',y) = 1;
 ResidualCapacity(r,"VIR_ICE",y) = 999;
-TotalAnnualMaxCapacityInvestment(r,'VIR_ICE',y) = 0;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=="popol"
@@ -130,6 +131,7 @@ OutputActivityRatio(r,'VIR_WIN','WIN',"1",y) = 1;
 OutputActivityRatio(r,'VIR_GTH','GTH',"1",y) = 1;
 OutputActivityRatio(r,'VIR_HYD','HYD',"1",y) = 1;
 OutputActivityRatio(r,'VIR_ICE','ICE',"1",y) = 1;
+OutputActivityRatio(r,'VIR_ICE','ICE_PROD',"1",y) = 1;
 
 OutputActivityRatio(r,'PRODWST','WST',"1",y) = 1;
 OutputActivityRatio(r,'IMPBIO1','WBM',"1",y) = 1;

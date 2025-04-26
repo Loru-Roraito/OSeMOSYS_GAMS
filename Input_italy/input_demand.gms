@@ -8,14 +8,18 @@ set     TECHNOLOGY      /
         RL1 'Residential lighting'
         RC1 'Residential cooling'
         TXE 'Personal vehicles - electric'
-        IHE 'Industrial heating - electric' /;
+        IHE 'Industrial heating - electric'
+        MEL 'melting'
+        FRO 'forming' /;
 
 set    FUEL            /
         RH 'Demand for residential heating'
         RL 'Demand for residential lighting'
         RC 'Demand for residential cooling'
         IH 'Demand for industrial heating'
-        TX 'Demand for personal transport' /;
+        TX 'Demand for personal transport' 
+        IM 'Ice demand'
+        FI 'Ice forming' /;
 
 $elseif.ph %phase%=='data' 
 *------------------------------------------------------------------------	
@@ -31,6 +35,10 @@ SpecifiedAnnualDemand(r,"RC",y) = 0.38 * 0.2 * fen_2025;
 SpecifiedAnnualDemand(r,"RL",y) = 0.38 * 0.3 * fen_2025;
 SpecifiedAnnualDemand(r,"IH",y) = 0.21 * fen_2025;
 AccumulatedAnnualDemand(r,"TX",y) = 0.33 * fen_2025;
+
+AccumulatedAnnualDemand(r,"IM",y) = 10;
+AccumulatedAnnualDemand(r,"FI",y) = 5;
+equation MeltedIceBalance;
 
 parameter SpecifiedDemandProfile(r,f,l,y) /
   ITALY.RH.ID.(%yearstart%*%yearend% )  .12
@@ -125,5 +133,11 @@ OutputActivityRatio(r,"TXE","TX","1",y) = 10; # average thousands km travelled p
 InputActivityRatio(r,"IHE","ELC","1",y) = 1;
 # demand for industrial heating is thermal
 OutputActivityRatio(r,"IHE","IH","1",y) = 1;
+
+InputActivityRatio(r,"MEL","ICE_MEL","1",y) = 1;
+OutputActivityRatio(r,"MEL","IM","1",y) = 1;
+
+InputActivityRatio(r,"FRO","ICE_PROD","1",y) = 1;
+OutputActivityRatio(r,"FRO","FI","1",y) = 1;
 
 $endif.ph
