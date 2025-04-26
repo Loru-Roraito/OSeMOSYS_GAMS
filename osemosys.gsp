@@ -103,8 +103,8 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "gams3.gdx",
-            "name": "gams3.gdx",
+            "file": "gams2.gdx",
+            "name": "gams2.gdx",
             "type": "gdx"
         },
         {
@@ -114,10 +114,10 @@
             "name": "osemosys.gms",
             "options": [
                 "--data = utopia",
-                "",
                 "--data = template",
                 "--data = template --solvermode = mip",
                 "--data = italyTry",
+                "",
                 "--data = italy"
             ],
             "type": "gms"
@@ -139,10 +139,10 @@
     ],
     "options": [
         "--data = utopia",
-        "",
         "--data = template",
         "--data = template --solvermode = mip",
         "--data = italyTry",
+        "",
         "--data = italy"
     ],
     "path": ".",

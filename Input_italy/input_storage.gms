@@ -48,8 +48,19 @@ CapitalCost(r,'ICE_MELT',y) = 0;
 VariableCost(r,'ICE_MELT',m,y) = 0;
 FixedCost(r,'ICE_MELT',y) = 0;
 OperationalLife(r,'ICE_MELT') = 999;
-ResidualCapacity(r,'ICE_MELT',y) = 999;
+ResidualCapacity(r,'ICE_MELT',y) = %melting_rate%;
 TotalAnnualMaxCapacityInvestment(r,'ICE_MELT',y) = 0;
+
+CapacityFactor(r,'ICE_GROW',"ID",y) = 1;
+CapacityFactor(r,'ICE_GROW',"IN",y) = 1;
+CapacityFactor(r,'ICE_GROW',"SD",y) = 1;
+CapacityFactor(r,'ICE_GROW',"SN",y) = 1;
+CapacityFactor(r,'ICE_GROW',"WD",y) = 1;
+CapacityFactor(r,'ICE_GROW',"WN",y) = 1;
+CapitalCost(r,'ICE_GROW',y) = 0;
+VariableCost(r,'ICE_GROW',m,y) = 0;
+FixedCost(r,'ICE_GROW',y) = 0;
+OperationalLife(r,'ICE_GROW') = 999;
 
 CapitalCostStorage(r,'HYDROGEN',y) = 100;
 ResidualStorageCapacity(r,'HYDROGEN',y) = 0;
@@ -74,9 +85,11 @@ OutputActivityRatio(r,'HEL','ELC',"2",y) = 0.6; #IEA convention
 InputActivityRatio(r,'STOR_HYDRO','ELC',"1",y) = 1; #IEA convention
 OutputActivityRatio(r,'STOR_HYDRO','ELC',"2",y) = 1; #IEA convention
 
-InputActivityRatio(r,'ICE_MELT','ICE',"1",y) = 1; #IEA convention
+InputActivityRatio(r,'ICE_GROW','ICE',"1",y) = 1; #IEA convention
+OutputActivityRatio(r,'ICE_GROW','ICE_PROD',"1",y) = 1; #IEA convention
+
 OutputActivityRatio(r,'ICE_MELT','ICE_MEL',"2",y) = 1; #IEA convention
-OutputActivityRatio(r,'ICE_MELT','HYD',"2",y) = 0.9; #IEA convention
+OutputActivityRatio(r,'ICE_MELT','HYDMEL',"2",y) = 0.9; #IEA convention
 
 TechnologyToStorage(r,"1",'HEL','HYDROGEN') = 1;
 TechnologyFromStorage(r,"2",'HEL','HYDROGEN') = 1;
@@ -84,7 +97,7 @@ TechnologyFromStorage(r,"2",'HEL','HYDROGEN') = 1;
 TechnologyToStorage(r,"1",'STOR_HYDRO','DAM') = 1;
 TechnologyFromStorage(r,"2",'STOR_HYDRO','DAM') = 1;
 
-TechnologyToStorage(r,"1",'ICE_MELT','GLACIERS') = 1;
+TechnologyToStorage(r,"1",'ICE_GROW','GLACIERS') = 1;
 TechnologyFromStorage(r,"2",'ICE_MELT','GLACIERS') = 1;
 
 

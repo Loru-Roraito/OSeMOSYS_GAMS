@@ -28,12 +28,14 @@ set     FUEL    /
         SUN 'Solar energy'
         WIN 'Wind energy'
         HYD 'Hydro energy'
+        HYDMEL 'Hydro energy (melt)'
+        ICW 'Ice water'
         ICE 'Ice forming/melting'
         ICE_MEL
         ICE_PROD
 /;
 
-set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD /;
+set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD, HYDMEL, ICW /;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=='data'
@@ -131,7 +133,6 @@ OutputActivityRatio(r,'VIR_WIN','WIN',"1",y) = 1;
 OutputActivityRatio(r,'VIR_GTH','GTH',"1",y) = 1;
 OutputActivityRatio(r,'VIR_HYD','HYD',"1",y) = 1;
 OutputActivityRatio(r,'VIR_ICE','ICE',"1",y) = 1;
-OutputActivityRatio(r,'VIR_ICE','ICE_PROD',"1",y) = 1;
 
 OutputActivityRatio(r,'PRODWST','WST',"1",y) = 1;
 OutputActivityRatio(r,'IMPBIO1','WBM',"1",y) = 1;

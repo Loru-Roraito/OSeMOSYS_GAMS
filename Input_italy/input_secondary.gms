@@ -9,6 +9,7 @@ set     TECHNOLOGY      /
         CCGT 'Combined cycle gas turbines'
         CHP 'Cogeneration plants'
         ROR 'run-of-river hydroelectric power plants'
+        ROM 'Run-of-melted hydroelectric power plants'
         OIL_GEN 'Oil power plants'
         BIO 'Biomass power plants'
         GEO 'Geothermal power plants'
@@ -23,9 +24,9 @@ set    FUEL            /
         GSL 'Gasoline'
         THE 'Thermal energy' /; 
 
-set power_plants(TECHNOLOGY)   / COAL, OCGT, CCGT, CHP, ROR, OIL_GEN, BIO, GEO, WTE, SRE, SPV, WPP /;
+set power_plants(TECHNOLOGY)   / COAL, OCGT, CCGT, CHP, ROR, ROM, OIL_GEN, BIO, GEO, WTE, SRE, SPV, WPP /;
 set fuel_transformation(TECHNOLOGY) / SRE /;
-set renewable_tech(TECHNOLOGY) / SPV, WPP, WTE, BIO, GEO, ROR /;
+set renewable_tech(TECHNOLOGY) / SPV, WPP, WTE, BIO, GEO, ROR, ROM /;
 
 set secondary_carrier(FUEL) / ELC, DSL, GSL/;
 
@@ -87,6 +88,13 @@ CapitalCost(r,'ROR',y) = 3000;
 VariableCost(r,'ROR',m,y) = 1e-5;
 FixedCost(r,'ROR',y) = 10;
 ResidualCapacity(r,"ROR",y) = 12;
+
+OperationalLife(r,'ROM') = 80;
+AvailabilityFactor(r,'ROM',y) = 0.27;
+CapitalCost(r,'ROM',y) = 3000;
+VariableCost(r,'ROM',m,y) = 1e-5;
+FixedCost(r,'ROM',y) = 10;
+ResidualCapacity(r,"ROM",y) = 12;
 
 # Characterize COAL technology
 OperationalLife(r,'COAL') = 50;
@@ -158,6 +166,9 @@ OutputActivityRatio(r,'COAL','ELC',"1",y) = 1;
 
 InputActivityRatio(r,'ROR','HYD',"1",y) = 1;
 OutputActivityRatio(r,'ROR','ELC',"1",y) = 1;
+
+InputActivityRatio(r,'ROM','HYDMEL',"1",y) = 1;
+OutputActivityRatio(r,'ROM','ELC',"1",y) = 1;
 
 ** open cycle gas turbines
 InputActivityRatio(r,'OCGT','GAS',"1",y) = 1/0.35;

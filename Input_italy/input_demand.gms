@@ -36,9 +36,8 @@ SpecifiedAnnualDemand(r,"RL",y) = 0.38 * 0.3 * fen_2025;
 SpecifiedAnnualDemand(r,"IH",y) = 0.21 * fen_2025;
 AccumulatedAnnualDemand(r,"TX",y) = 0.33 * fen_2025;
 
-AccumulatedAnnualDemand(r,"IM",y) = 10;
-AccumulatedAnnualDemand(r,"FI",y) = 5;
-equation MeltedIceBalance;
+AccumulatedAnnualDemand(r,"IM",y) = %melting_rate%;
+AccumulatedAnnualDemand(r,"FI",y) = %forming_rate%;
 
 parameter SpecifiedDemandProfile(r,f,l,y) /
   ITALY.RH.ID.(%yearstart%*%yearend% )  .12

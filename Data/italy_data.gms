@@ -1,7 +1,9 @@
 ** configuration options
 $setglobal storage 1
 $setglobal yearstart 2025
-$setglobal yearend 2030
+$setglobal yearend 2040
+$setglobal melting_rate 10
+$setglobal forming_rate 5
 
 *------------------------------------------------------------------------	
 * Sets       
