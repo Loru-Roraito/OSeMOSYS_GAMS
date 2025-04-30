@@ -110,6 +110,13 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
+            "file": "gams6.gdx",
+            "name": "gams6.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
             "file": "osemosys.gms",
             "name": "osemosys.gms",
             "options": [
