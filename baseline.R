@@ -1,3 +1,6 @@
+require (gdxtools)
+require (tidyverse)
+
 #### require results_analysis.R to run 
 data_select <- "renewables"
 scen_select <- "base"
@@ -37,7 +40,7 @@ ggplot(Production %>%
 ### storage
 ggplot(Activity %>%
          filter(scen==scen_select & data==data_select & TECHNOLOGY %in% stor & storage==want_storage & YEAR==2010) %>% 
-         inner_join(hourly_split) %>%
+         cross_join(hourly_split) %>%
          filter(yearly_hours <= 24)) +
   geom_line(aes(x=yearly_hours,
                 y=value,

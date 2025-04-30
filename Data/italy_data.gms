@@ -2,9 +2,10 @@
 ** prova
 $setglobal storage 1
 $setglobal yearstart 2025
-$setglobal yearend 2040
-$setglobal melting_rate 10
-$setglobal forming_rate 5
+$setglobal yearend 2030
+
+**DV/Dt= -0.0053 * modulo(T(t)-Teq(t)) * (T(t)-Teq(t))^2 * (V(t-1)/100)^0.2
+**Teq = 3.4*(1-V(t)/100)
 
 *------------------------------------------------------------------------	
 * Sets       
@@ -17,6 +18,11 @@ set     TIMESLICE  / ID, IN, SD, SN, WD, WN /;
 set     SEASON / 1, 2, 3 /;
 set     DAYTYPE / 1 /;
 set     DAILYTIMEBRACKET / 1, 2 /;
+
+parameter melting_rate(YEAR);
+parameter forming_rate(YEAR);
+melting_rate(y) = 10 + ord(y)*1;
+forming_rate(y) = 10 - ord(y)*1;
 
 # characterize technologies 
 set power_plants(TECHNOLOGY);

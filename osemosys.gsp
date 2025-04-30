@@ -5,6 +5,13 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
+            "file": "Data/italy_data.gms",
+            "name": "italy_data.gms",
+            "type": "gms"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
             "file": "Data/template_data.gms",
             "name": "template_data.gms",
             "type": "gms"
@@ -103,21 +110,14 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "gams2.gdx",
-            "name": "gams2.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
             "file": "osemosys.gms",
             "name": "osemosys.gms",
             "options": [
                 "--data = utopia",
+                "",
                 "--data = template",
                 "--data = template --solvermode = mip",
                 "--data = italyTry",
-                "",
                 "--data = italy"
             ],
             "type": "gms"
@@ -139,10 +139,10 @@
     ],
     "options": [
         "--data = utopia",
+        "",
         "--data = template",
         "--data = template --solvermode = mip",
         "--data = italyTry",
-        "",
         "--data = italy"
     ],
     "path": ".",

@@ -6,7 +6,7 @@ require(ggpubr)
 
 ####### here you select your results for your plot
 complete_directory <- here::here()
-all_gdx <- c(Sys.glob(here::here("Results/results_*.gdx")))
+all_gdx <- c(Sys.glob(here::here("gams*.gdx")))
 
 osemosys_sanitize <- function(.x) {
   .x[, file := basename(gdx)]
