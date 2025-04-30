@@ -110,8 +110,22 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "gams6.gdx",
-            "name": "gams6.gdx",
+            "file": "gams2.gdx",
+            "name": "gams2.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
+            "file": "gams3.gdx",
+            "name": "gams3.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
+            "file": "gams4.gdx",
+            "name": "gams4.gdx",
             "type": "gdx"
         },
         {

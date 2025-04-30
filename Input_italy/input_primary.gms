@@ -29,6 +29,7 @@ set     FUEL    /
         WIN 'Wind energy'
         HYD 'Hydro energy'
         HYDMEL 'Hydro energy (melt)'
+        DAMMEL 'Melted ice that goes into dams'
         ICW 'Ice water'
         ICE 'Ice forming/melting'
         ICE_MEL

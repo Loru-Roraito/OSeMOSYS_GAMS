@@ -18,7 +18,7 @@ $elseif.ph %phase%=='data'
 * Parameters - Demands       
 *------------------------------------------------------------------------
 scalar fen_2025;
-fen_2025 = 100; #TWh
+fen_2025 = 1000; #TWh
 
 AccumulatedAnnualDemand(r,"ED",y) = fen_2025;
 
