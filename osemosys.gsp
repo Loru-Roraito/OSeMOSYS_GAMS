@@ -54,6 +54,13 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
+            "file": "Input_template/input_demand.gms",
+            "name": "input_demand.gms",
+            "type": "gms"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
             "file": "Input_template/input_primary.gms",
             "name": "input_primary.gms",
             "type": "gms"
@@ -103,29 +110,15 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "gams1.gdx",
-            "name": "gams1.gdx",
+            "file": "Results/results_SCENbase_DATAitaly_STORyes.gdx",
+            "name": "results_SCENbase_DATAitaly_STORyes.gdx",
             "type": "gdx"
         },
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "gams2.gdx",
-            "name": "gams2.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
-            "file": "gams3.gdx",
-            "name": "gams3.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
-            "file": "gams4.gdx",
-            "name": "gams4.gdx",
+            "file": "Results/results_SCENbase_DATAtemplate_STORyes.gdx",
+            "name": "results_SCENbase_DATAtemplate_STORyes.gdx",
             "type": "gdx"
         },
         {
@@ -136,9 +129,10 @@
             "options": [
                 "--data = utopia",
                 "",
-                "--data = template",
-                "--data = template --solvermode = mip",
                 "--data = italyTry",
+                "--data = italy --solvermode = mip",
+                "--data = template --solvermode = mip",
+                "--data = template",
                 "--data = italy"
             ],
             "type": "gms"
@@ -161,9 +155,10 @@
     "options": [
         "--data = utopia",
         "",
-        "--data = template",
-        "--data = template --solvermode = mip",
         "--data = italyTry",
+        "--data = italy --solvermode = mip",
+        "--data = template --solvermode = mip",
+        "--data = template",
         "--data = italy"
     ],
     "path": ".",

@@ -6,16 +6,16 @@ library(gdxtools)
 ## 1.1: list all result files
 myfiles <- list.files(path="Results/.",pattern=".gdx")
 ## 1.2: list all gdx objects (sets, parameters, so on) that you want loaded
-myvars <- c("StorageLevelYearStart")
+myvars <- c("TotalTechnologyAnnualActivity", "StorageLevelYearStart")
 
 ## step 1.3: load with batch extract and tidy the dataframe
 results <- batch_extract(myvars,paste0("Results/",myfiles) ) %>%
   bind_rows(.id="variable") %>%
-  mutate(gdx = str_remove_all(gdx,"Results/gams|.gdx"),
+  mutate(gdx = str_remove_all(gdx,"Results/results_|.gdx"),
          t = as.numeric(YEAR) ) %>%
   as_tibble() %>% 
   rename(scenario=gdx) %>%
-  select(t,REGION,STORAGE,variable,scenario,value)
+  select(t,REGION,STORAGE,TECHNOLOGY,variable,scenario,value)
 
 ## side note: tidy dataframe, long vs short
 wide_ghg <- results %>% 
@@ -28,11 +28,11 @@ long_ghg <- wide_ghg %>%
 
 ## most basic plot...
 ggplot(data=results %>% 
-         filter(t <= 2040 & 
+         filter(t <= 2 & 
                   REGION=="ITALY" & 
                   STORAGE=="GLACIERS" & 
                   variable=="StorageLevelYearStart" & 
-                  scenario=="1") ) +
+                  scenario=="SCENbase_DATAitaly_STORyes") ) +
   geom_line( aes(x=t,y=value) )
 
 #less basic plots
@@ -40,7 +40,18 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("GLACIERS", "DAM"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "1")) +
+                scenario == "SCENbase_DATAitaly_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                TECHNOLOGY == "ROM", 
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENbase_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
   theme_classic() + 

@@ -49,7 +49,7 @@ CapitalCost(r,'WATER_HYDRO',y) = 0;
 VariableCost(r,'WATER_HYDRO',m,y) = 0;
 FixedCost(r,'WATER_HYDRO',y) = 0;
 OperationalLife(r,'WATER_HYDRO') = 999;
-ResidualCapacity(r,'WATER_HYDRO',y) = 999;
+ResidualCapacity(r,'WATER_HYDRO',y) = 500;
 TotalAnnualMaxCapacityInvestment(r,'WATER_HYDRO',y) = 0;
 
 CapacityFactor(r,'ICE_MELT',"ID",y) = 1;
@@ -99,6 +99,8 @@ InputActivityRatio(r,'HEL','ELC',"1",y) = 2; #IEA convention
 OutputActivityRatio(r,'HEL','ELC',"2",y) = 0.6; #IEA convention
 
 InputActivityRatio(r,'WATER_HYDRO','DAMMEL',"1",y) = 1;
+OutputActivityRatio(r,'WATER_HYDRO','WAT_DAM',"1",y) = 1;
+
 InputActivityRatio(r,'STOR_HYDRO','ELC',"1",y) = 1; #IEA convention
 OutputActivityRatio(r,'STOR_HYDRO','ELC',"2",y) = 0.5; #IEA convention
 

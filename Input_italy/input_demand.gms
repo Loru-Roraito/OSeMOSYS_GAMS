@@ -6,24 +6,27 @@ $ifthen.ph %phase%=='sets'
 set     TECHNOLOGY      /
         ELT 'Electricity' 
         MEL 'Ice melting'
-        FRO 'Ice forming'/;
+        FRO 'Ice forming'
+        DMW/;
 
 set    FUEL            /
         ED 'Demand for electricity'
         IM 'Ice demand'
-        FI 'Ice forming' /;
+        FI 'Ice forming' 
+        ID/;
 
 $elseif.ph %phase%=='data' 
 *------------------------------------------------------------------------	
 * Parameters - Demands       
 *------------------------------------------------------------------------
 scalar fen_2025;
-fen_2025 = 1000; #TWh
+fen_2025 = 500; #TWh
 
 AccumulatedAnnualDemand(r,"ED",y) = fen_2025;
 
 AccumulatedAnnualDemand(r,"IM",y) = melting_rate(y);
 AccumulatedAnnualDemand(r,"FI",y) = forming_rate(y);
+AccumulatedAnnualDemand(r,"ID",y) = melting_rate(y)*0.8;
 
 parameter SpecifiedAnnualDemand(r,f,y) /
 /;
@@ -65,5 +68,8 @@ OutputActivityRatio(r,"MEL","IM","1",y) = 1;
 
 InputActivityRatio(r,"FRO","ICE_PROD","1",y) = 1;
 OutputActivityRatio(r,"FRO","FI","1",y) = 1;
+
+InputActivityRatio(r,"DMW","WAT_DAM","1",y) = 1;
+OutputActivityRatio(r,"DMW","ID","1",y) = 1;
 
 $endif.ph

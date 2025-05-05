@@ -104,9 +104,6 @@ equation CAb1_PlannedMaintenance(REGION,TECHNOLOGY,YEAR);
 CAb1_PlannedMaintenance(r,t,y)..
     sum(l, RateOfTotalActivity(r,l,t,y)*YearSplit(l,y)) =l= sum(l,TotalCapacityAnnual(r,t,y)*CapacityFactor(r,t,l,y)*YearSplit(l,y))*AvailabilityFactor(r,t,y)*CapacityToActivityUnit(r,t);
 
-equation CAb1_PlannedMaintenanceMaxwork(REGION,tech,YEAR);
-CAb1_PlannedMaintenanceMaxwork(r,t,y)..
-    sum(l, RateOfTotalActivity(r,l,t,y)*YearSplit(l,y)) =e= sum(l,TotalCapacityAnnual(r,t,y)*CapacityFactor(r,t,l,y)*YearSplit(l,y))*AvailabilityFactor(r,t,y)*CapacityToActivityUnit(r,t);
 
 *------------------------------------------------------------------------	
 * Energy Balance A       
