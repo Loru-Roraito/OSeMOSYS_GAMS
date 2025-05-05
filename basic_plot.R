@@ -26,34 +26,25 @@ long_ghg <- wide_ghg %>%
 
 #### STEP 2: plotting
 
-## most basic plot...
-ggplot(data=results %>% 
-         filter(t <= 2 & 
-                  REGION=="ITALY" & 
-                  STORAGE=="GLACIERS" & 
-                  variable=="StorageLevelYearStart" & 
-                  scenario=="SCENbase_DATAitaly_STORyes") ) +
-  geom_line( aes(x=t,y=value) )
-
 #less basic plots
 ggplot(data = results %>% 
          filter(REGION == "ITALY", 
-                STORAGE %in% c("GLACIERS", "DAM"), 
+                STORAGE %in% c("GLACIERS", "DAM", "HYDROGEN"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENbase_DATAitaly_STORyes")) +
+                scenario == "SCENctax100_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
   theme_classic() + 
   geom_hline(yintercept = 0, color = "grey")
 
 #less basic plots
-ggplot(data = results %>% 
+ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY == "ROM", 
+                TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENbase_DATAitaly_STORyes")) +
-  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
-  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+                scenario == "SCENctax100_DATAitaly_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
   geom_hline(yintercept = 0, color = "grey")
 

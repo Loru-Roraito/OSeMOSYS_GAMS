@@ -33,6 +33,13 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
+            "file": "Input_italy/input_primary.gms",
+            "name": "input_primary.gms",
+            "type": "gms"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
             "file": "Input_italy/input_secondary.gms",
             "name": "input_secondary.gms",
             "type": "gms"
@@ -130,10 +137,11 @@
                 "--data = utopia",
                 "",
                 "--data = italyTry",
-                "--data = italy --solvermode = mip",
                 "--data = template --solvermode = mip",
                 "--data = template",
-                "--data = italy"
+                "--data = italy",
+                "--data = italy --solvermode = mip",
+                "--data = italy --solvermode = mip --scen = ctax --value = 100"
             ],
             "type": "gms"
         },
@@ -156,10 +164,11 @@
         "--data = utopia",
         "",
         "--data = italyTry",
-        "--data = italy --solvermode = mip",
         "--data = template --solvermode = mip",
         "--data = template",
-        "--data = italy"
+        "--data = italy",
+        "--data = italy --solvermode = mip",
+        "--data = italy --solvermode = mip --scen = ctax --value = 100"
     ],
     "path": ".",
     "pf": "",

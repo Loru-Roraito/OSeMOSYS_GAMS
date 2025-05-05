@@ -19,10 +19,10 @@ $elseif.ph %phase%=='data'
 *------------------------------------------------------------------------	
 * Parameters - Demands       
 *------------------------------------------------------------------------
-scalar fen_2025;
-fen_2025 = 500; #TWh
+scalar el_2015;
+el_2015 = 282.395; #TWh
 
-AccumulatedAnnualDemand(r,"ED",y) = fen_2025;
+AccumulatedAnnualDemand(r,"ED",y) = el_2015;
 
 AccumulatedAnnualDemand(r,"IM",y) = melting_rate(y);
 AccumulatedAnnualDemand(r,"FI",y) = forming_rate(y);

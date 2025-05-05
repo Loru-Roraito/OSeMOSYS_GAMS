@@ -12,8 +12,6 @@ SET TECHNOLOGY /HEL   "Hydrogen Electrolyzers",
                 ICE_MELT   'Glacier melting'/;
 
 set storage_plants(TECHNOLOGY) / HEL, STOR_HYDRO, ICE_GROW, ICE_MELT /;
-alias (t, tech);
-set maxwork(tech) / WATER_HYDRO /;
 
 ** ------------------------------------------------
 $elseif.ph %phase%=='data' 
@@ -21,9 +19,19 @@ $elseif.ph %phase%=='data'
 # Characterize ELECTROLIZERS
 AvailabilityFactor(r,'HEL',y) = 0.9;
 OperationalLife(r,'HEL') = 10;
-CapitalCost(r,'HEL',y) = 1;
-VariableCost(r,'HEL',m,y) = 0;
-FixedCost(r,'HEL',y) = 0;
+CapitalCost(r,'HEL',yRange1) = 1188;
+CapitalCost(r,'HEL',yRange2) = 701;
+CapitalCost(r,'HEL',yRange3) = 382;
+CapitalCost(r,'HEL',yRange4) = 314;
+VariableCost(r,'HEL',m,yRange1) = 0;
+VariableCost(r,'HEL',m,yRange2) = 0;
+VariableCost(r,'HEL',m,yRange3) = 0;
+VariableCost(r,'HEL',m,yRange4) = 0;
+FixedCost(r,'HEL',yRange1) = 47.52;
+FixedCost(r,'HEL',yRange2) = 28.04;
+FixedCost(r,'HEL',yRange3) = 20.3;
+FixedCost(r,'HEL',yRange4) =12.56;
+ResidualCapacity(r,'HEL',y) = 999;
 
 # characterize dam hydro storage
 CapacityFactor(r,'STOR_HYDRO',"ID",y) = 0.7;
@@ -79,12 +87,12 @@ ResidualCapacity(r,'ICE_GROW',y) = forming_rate(y);
 TotalAnnualMaxCapacityInvestment(r,'ICE_GROW',y) = 0;
 
 CapitalCostStorage(r,'HYDROGEN',y) = 100;
-ResidualStorageCapacity(r,'HYDROGEN',y) = 0;
+ResidualStorageCapacity(r,'HYDROGEN',y) = 999;
 StorageLevelStart(r,'HYDROGEN') = 0;
 
 CapitalCostStorage(r,'DAM',y) = 100;
 ResidualStorageCapacity(r,'DAM',y) = 999;
-StorageLevelStart(r,'DAM') = 500;
+StorageLevelStart(r,'DAM') = %initialvolume%;
 
 CapitalCostStorage(r,'GLACIERS',y) = 100;
 ResidualStorageCapacity(r,'GLACIERS',y) = 999;
@@ -101,8 +109,8 @@ OutputActivityRatio(r,'HEL','ELC',"2",y) = 0.6; #IEA convention
 InputActivityRatio(r,'WATER_HYDRO','DAMMEL',"1",y) = 1;
 OutputActivityRatio(r,'WATER_HYDRO','WAT_DAM',"1",y) = 1;
 
-InputActivityRatio(r,'STOR_HYDRO','ELC',"1",y) = 1; #IEA convention
-OutputActivityRatio(r,'STOR_HYDRO','ELC',"2",y) = 0.5; #IEA convention
+InputActivityRatio(r,'STOR_HYDRO','ELC',"1",y) = 2; #IEA convention
+OutputActivityRatio(r,'STOR_HYDRO','ELC',"2",y) = 0.6; #IEA convention
 
 InputActivityRatio(r,'ICE_GROW','ICE',"1",y) = 1; #IEA convention
 OutputActivityRatio(r,'ICE_GROW','ICE_PROD',"1",y) = 1; #IEA convention

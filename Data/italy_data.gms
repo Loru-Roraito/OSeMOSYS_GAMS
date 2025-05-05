@@ -1,11 +1,9 @@
 ** configuration options
 ** prova
 $setglobal storage 1
-$setglobal yearstart 2025
-$setglobal yearend 2125
-
-**DV/Dt= -0.0053 * modulo(T(t)-Teq(t)) * (T(t)-Teq(t))^2 * (V(t-1)/100)^0.2
-**Teq = 3.4*(1-V(t)/100)
+$setglobal yearstart 2015
+$setglobal yearend 2100
+$setglobal initialvolume 500
 
 *------------------------------------------------------------------------	
 * Sets       
@@ -22,7 +20,17 @@ set     DAILYTIMEBRACKET / 1, 2 /;
 parameter melting_rate(YEAR);
 parameter forming_rate(YEAR);
 
-melting_rate(y) = 5*100*0.0164*(2.71828**(-0.0164*ord(y)));
+Set yRange1(YEAR);
+Set yRange2(YEAR);
+Set yRange3(YEAR);
+Set yRange4(YEAR);
+
+yRange1(YEAR) = yes$(YEAR.val >= 2015 and YEAR.val <= 2024);
+yRange2(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2034);
+yRange3(YEAR) = yes$(YEAR.val >= 2035 and YEAR.val <= 2044);
+yRange4(YEAR) = yes$(YEAR.val >= 2045 and YEAR.val <= 2100);
+
+melting_rate(y) = %initialvolume%*0.0164*(2.71828**(-0.0164*ord(y)));
 forming_rate(y) = 0;
 
 # characterize technologies 
