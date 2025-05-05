@@ -31,7 +31,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("GLACIERS", "DAM", "HYDROGEN"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctax100_DATAitaly_STORyes")) +
+                scenario == "SCENbase_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
   theme_classic() + 
@@ -42,9 +42,31 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctax100_DATAitaly_STORyes")) +
+                scenario == "SCENbase_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
   geom_hline(yintercept = 0, color = "grey")
 
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("GLACIERS", "DAM", "HYDROGEN"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENctax100_DATAitaly_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("STOR_HYDRO", "COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctax100_DATAitaly_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+             

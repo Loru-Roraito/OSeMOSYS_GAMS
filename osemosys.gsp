@@ -135,12 +135,12 @@
             "name": "osemosys.gms",
             "options": [
                 "--data = utopia",
-                "",
                 "--data = italyTry",
                 "--data = template --solvermode = mip",
                 "--data = template",
                 "--data = italy",
                 "--data = italy --solvermode = mip",
+                "",
                 "--data = italy --solvermode = mip --scen = ctax --value = 100"
             ],
             "type": "gms"
@@ -162,12 +162,12 @@
     ],
     "options": [
         "--data = utopia",
-        "",
         "--data = italyTry",
         "--data = template --solvermode = mip",
         "--data = template",
         "--data = italy",
         "--data = italy --solvermode = mip",
+        "",
         "--data = italy --solvermode = mip --scen = ctax --value = 100"
     ],
     "path": ".",

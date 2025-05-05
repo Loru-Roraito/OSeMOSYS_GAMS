@@ -20,15 +20,17 @@ set     DAILYTIMEBRACKET / 1, 2 /;
 parameter melting_rate(YEAR);
 parameter forming_rate(YEAR);
 
+Set yRange0(YEAR);
 Set yRange1(YEAR);
 Set yRange2(YEAR);
 Set yRange3(YEAR);
 Set yRange4(YEAR);
 
-yRange1(YEAR) = yes$(YEAR.val >= 2015 and YEAR.val <= 2024);
-yRange2(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2034);
-yRange3(YEAR) = yes$(YEAR.val >= 2035 and YEAR.val <= 2044);
-yRange4(YEAR) = yes$(YEAR.val >= 2045 and YEAR.val <= 2100);
+yRange0(YEAR) = yes$(YEAR.val >= 2015 and YEAR.val <= 2019);
+yRange1(YEAR) = yes$(YEAR.val >= 2020 and YEAR.val <= 2030);
+yRange2(YEAR) = yes$(YEAR.val >= 2030 and YEAR.val <= 2040);
+yRange3(YEAR) = yes$(YEAR.val >= 2040 and YEAR.val <= 2050);
+yRange4(YEAR) = yes$(YEAR.val >= 2050 and YEAR.val <= 2100);
 
 melting_rate(y) = %initialvolume%*0.0164*(2.71828**(-0.0164*ord(y)));
 forming_rate(y) = 0;

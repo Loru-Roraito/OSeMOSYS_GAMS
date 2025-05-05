@@ -19,18 +19,21 @@ $elseif.ph %phase%=='data'
 # Characterize ELECTROLIZERS
 AvailabilityFactor(r,'HEL',y) = 0.9;
 OperationalLife(r,'HEL') = 10;
-CapitalCost(r,'HEL',yRange1) = 1188;
-CapitalCost(r,'HEL',yRange2) = 701;
-CapitalCost(r,'HEL',yRange3) = 382;
-CapitalCost(r,'HEL',yRange4) = 314;
-VariableCost(r,'HEL',m,yRange1) = 0;
-VariableCost(r,'HEL',m,yRange2) = 0;
-VariableCost(r,'HEL',m,yRange3) = 0;
-VariableCost(r,'HEL',m,yRange4) = 0;
-FixedCost(r,'HEL',yRange1) = 47.52;
-FixedCost(r,'HEL',yRange2) = 28.04;
-FixedCost(r,'HEL',yRange3) = 20.3;
-FixedCost(r,'HEL',yRange4) =12.56;
+CapitalCost(r,'HEL',YEAR)$(yRange0(YEAR)) = 1188;
+CapitalCost(r,'HEL',YEAR)$(yRange1(YEAR)) = 1432-49*ord(YEAR);
+CapitalCost(r,'HEL',YEAR)$(yRange2(YEAR)) = 1180-32*ord(YEAR);
+CapitalCost(r,'HEL',YEAR)$(yRange3(YEAR)) = 552-7*ord(YEAR);
+CapitalCost(r,'HEL',YEAR)$(yRange4(YEAR)) = 314;
+VariableCost(r,'HEL',m,YEAR)$(yRange0(YEAR)) = 0;
+VariableCost(r,'HEL',m,YEAR)$(yRange1(YEAR)) = 0;
+VariableCost(r,'HEL',m,YEAR)$(yRange2(YEAR)) = 0;
+VariableCost(r,'HEL',m,YEAR)$(yRange3(YEAR)) = 0;
+VariableCost(r,'HEL',m,YEAR)$(yRange4(YEAR)) = 0;
+FixedCost(r,'HEL',YEAR)$(yRange0(YEAR)) = 47.52;
+FixedCost(r,'HEL',YEAR)$(yRange1(YEAR)) = 57.26-1.95*ord(YEAR);
+FixedCost(r,'HEL',YEAR)$(yRange2(YEAR)) = 39.65-0.77*ord(YEAR);
+FixedCost(r,'HEL',YEAR)$(yRange3(YEAR)) = 39.65-0.77*ord(YEAR);
+FixedCost(r,'HEL',YEAR)$(yRange4(YEAR)) =12.56;
 ResidualCapacity(r,'HEL',y) = 999;
 
 # characterize dam hydro storage
