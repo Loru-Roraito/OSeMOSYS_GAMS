@@ -7,13 +7,15 @@ set     TECHNOLOGY      /
         ELT 'Electricity' 
         MEL 'Ice melting'
         FRO 'Ice forming'
-        DMW/;
+        DMW 'Dam water from glaciers'
+        DMI  'Dam water from rain'/;
 
 set    FUEL            /
         ED 'Demand for electricity'
         IM 'Ice demand'
         FI 'Ice forming' 
-        ID/;
+        ID 'glacier input'
+        RD 'rain input'/;
 
 $elseif.ph %phase%=='data' 
 *------------------------------------------------------------------------	
@@ -24,9 +26,11 @@ el_2015 = 282.395; #TWh
 
 AccumulatedAnnualDemand(r,"ED",y) = el_2015;
 
-AccumulatedAnnualDemand(r,"IM",y) = melting_rate(y);
+** could instead update the equations of OSeMOSYS, but it's not working for now
+AccumulatedAnnualDemand(r,"IM",y) = melting_rate(y); # update: split into seasons (for some reason it becomes infeasible)
 AccumulatedAnnualDemand(r,"FI",y) = forming_rate(y);
-AccumulatedAnnualDemand(r,"ID",y) = melting_rate(y)*0.8;
+AccumulatedAnnualDemand(r,"ID",y) = melting_rate(y)*%dampercentage%;
+AccumulatedAnnualDemand(r,"RD",y) = %rains%;
 
 parameter SpecifiedAnnualDemand(r,f,y) /
 /;
@@ -55,6 +59,16 @@ VariableCost(r,"FRO",m,y) = 0;
 FixedCost(r,"FRO",y) = 0;
 OperationalLife(r,"FRO") = 999;
 
+CapitalCost(r,"DMW",y) = 0;
+VariableCost(r,"DMW",m,y) = 0;
+FixedCost(r,"DMW",y) = 0;
+OperationalLife(r,"DMW") = 999;
+
+CapitalCost(r,"DMI",y) = 0;
+VariableCost(r,"DMI",m,y) = 0;
+FixedCost(r,"DMI",y) = 0;
+OperationalLife(r,"DMI") = 999;
+
 *------------------------------------------------------------------------
 $elseif.ph %phase%=='popol'
 
@@ -71,5 +85,8 @@ OutputActivityRatio(r,"FRO","FI","1",y) = 1;
 
 InputActivityRatio(r,"DMW","WAT_DAM","1",y) = 1;
 OutputActivityRatio(r,"DMW","ID","1",y) = 1;
+
+InputActivityRatio(r,"DMI","WAT_IN","1",y) = 1;
+OutputActivityRatio(r,"DMI","RD","1",y) = 1;
 
 $endif.ph

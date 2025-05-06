@@ -35,6 +35,7 @@ set     FUEL    /
         ICE_MEL
         ICE_PROD
         WAT_DAM
+        WAT_IN
 /;
 
 set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD, HYDMEL, ICW /;

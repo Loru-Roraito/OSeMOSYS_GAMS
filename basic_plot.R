@@ -62,11 +62,23 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("STOR_HYDRO", "COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
                 scenario == "SCENctax100_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
   geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "OIL_GEN", "WTE", "SRE"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctax100_DATAitaly_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
              

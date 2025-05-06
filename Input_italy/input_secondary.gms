@@ -57,7 +57,7 @@ FixedCost(r,'SPV',YEAR)$(yRange2(YEAR)) = 11.6-0.14*ord(YEAR);
 FixedCost(r,'SPV',YEAR)$(yRange3(YEAR)) = 9.85-0.07*ord(YEAR);
 FixedCost(r,'SPV',YEAR)$(yRange4(YEAR)) = 7.4;
 ResidualCapacity(r,"SPV",y) = 53.981;
-TotalAnnualMaxCapacityInvestment(r,'SPV',y) = 10;
+TotalAnnualMaxCapacityInvestment(r,'SPV',y) = 10; # update
 
 # Characterize WIND technology (onshore)
 OperationalLife(r,'WPP') = 25;
@@ -165,7 +165,7 @@ FixedCost(r,'ROR',YEAR)$(yRange2(YEAR)) = 244.2-2.25*ord(YEAR);
 FixedCost(r,'ROR',YEAR)$(yRange3(YEAR)) = 198-0.4*ord(YEAR);
 FixedCost(r,'ROR',YEAR)$(yRange4(YEAR)) = 184;
 ResidualCapacity(r,"ROR",y) = 173.959;
-TotalAnnualMaxCapacityInvestment(r,'ROR',y) = 10;
+TotalAnnualMaxCapacityInvestment(r,'ROR',y) = 0;
 
 OperationalLife(r,'ROM') = 80;
 AvailabilityFactor(r,'ROM',y) = 0.27;
@@ -185,7 +185,7 @@ FixedCost(r,'ROM',YEAR)$(yRange2(YEAR)) = 244.2-2.25*ord(YEAR);
 FixedCost(r,'ROM',YEAR)$(yRange3(YEAR)) = 198-0.4*ord(YEAR);
 FixedCost(r,'ROM',YEAR)$(yRange4(YEAR)) = 184;
 ResidualCapacity(r,"ROM",y) = 100;
-TotalAnnualMaxCapacityInvestment(r,'ROM',y) = 10;
+TotalAnnualMaxCapacityInvestment(r,'ROM',y) = 0;
 
 # Characterize COAL technology
 OperationalLife(r,'COAL') = 30;
@@ -282,6 +282,7 @@ TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',y) = 10;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=='popol'
+#update efficiencies
 
 InputActivityRatio(r,'SPV','SUN',"1",y) = 1; #IEA convention
 OutputActivityRatio(r,'SPV','ELC',"1",y) = 1; 

@@ -3,7 +3,11 @@
 $setglobal storage 1
 $setglobal yearstart 2015
 $setglobal yearend 2100
-$setglobal initialvolume 500
+$setglobal initialvolume 19 #km3 ice volume in the glaciers
+$setglobal rains 36.5 #km3 rainfall/rivers that go into the dams unrelated to ice melt
+$setglobal dampercentage 0.9 #melting ice that goes to the dams
+$setglobal initialstorage 13.5 #km3 water in dams
+$setglobal maxdamextraction 37 #km3 water that can be extracted from the dams
 
 *------------------------------------------------------------------------	
 * Sets       
@@ -32,7 +36,7 @@ yRange2(YEAR) = yes$(YEAR.val >= 2030 and YEAR.val <= 2040);
 yRange3(YEAR) = yes$(YEAR.val >= 2040 and YEAR.val <= 2050);
 yRange4(YEAR) = yes$(YEAR.val >= 2050 and YEAR.val <= 2100);
 
-melting_rate(y) = %initialvolume%*0.0164*(2.71828**(-0.0164*ord(y)));
+melting_rate(y) = %initialvolume%*0.0164*exp(-0.0164*ord(y));
 forming_rate(y) = 0;
 
 # characterize technologies 

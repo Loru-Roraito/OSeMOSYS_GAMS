@@ -131,6 +131,13 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
+            "file": "Results/results_SCENctax100_DATAitaly_STORyes.gdx",
+            "name": "results_SCENctax100_DATAitaly_STORyes.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
             "file": "osemosys.gms",
             "name": "osemosys.gms",
             "options": [

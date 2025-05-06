@@ -158,7 +158,7 @@ ReserveMarginTagTechnology(r,t,y)$(not renewable_tech(t)) = 1;
 
 $if set no_initial_capacity ResidualCapacity(r,t,y) = 0;
 
-CapacityToActivityUnit(r,t)$power_plants(t) = 1;
+CapacityToActivityUnit(r,t)$power_plants(t) = 1; # could update, now working with energy instead of power
 
 CapacityToActivityUnit(r,t)$(CapacityToActivityUnit(r,t) = 0) = 1;
 
