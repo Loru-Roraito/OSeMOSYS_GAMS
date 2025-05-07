@@ -24,18 +24,21 @@ $elseif.ph %phase%=='data'
 scalar el_2015;
 el_2015 = 282.395; #TWh
 
-AccumulatedAnnualDemand(r,"ED",y) = el_2015;
+AccumulatedAnnualDemand(r,"ED",y) = el_2015 + el_2015*ord(y)/200; # update: split into seasons (for some reason it becomes infeasible)
 
 ** could instead update the equations of OSeMOSYS, but it's not working for now
-AccumulatedAnnualDemand(r,"IM",y) = melting_rate(y); # update: split into seasons (for some reason it becomes infeasible)
+SpecifiedAnnualDemand(r,"IM",y) = melting_rate(y); # update: split into seasons (for some reason it becomes infeasible)
 AccumulatedAnnualDemand(r,"FI",y) = forming_rate(y);
 AccumulatedAnnualDemand(r,"ID",y) = melting_rate(y)*%dampercentage%;
 AccumulatedAnnualDemand(r,"RD",y) = %rains%;
 
-parameter SpecifiedAnnualDemand(r,f,y) /
-/;
-
 parameter SpecifiedDemandProfile(r,f,l,y)/
+  ITALY.IM.ID.(%yearstart%*%yearend% )  .17
+  ITALY.IM.IN.(%yearstart%*%yearend% )  .16
+  ITALY.IM.SD.(%yearstart%*%yearend% )  .17
+  ITALY.IM.SN.(%yearstart%*%yearend% )  .16
+  ITALY.IM.WD.(%yearstart%*%yearend% )  .17
+  ITALY.IM.WN.(%yearstart%*%yearend% )  .17
 /;
 
 

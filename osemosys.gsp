@@ -5,20 +5,6 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "Data/italy_data.gms",
-            "name": "italy_data.gms",
-            "type": "gms"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
-            "file": "Data/template_data.gms",
-            "name": "template_data.gms",
-            "type": "gms"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
             "file": "Input_italy/init.gms",
             "name": "init.gms",
             "type": "gms"
@@ -117,22 +103,8 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "Results/results_SCENbase_DATAitaly_STORyes.gdx",
-            "name": "results_SCENbase_DATAitaly_STORyes.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
-            "file": "Results/results_SCENbase_DATAtemplate_STORyes.gdx",
-            "name": "results_SCENbase_DATAtemplate_STORyes.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
-            "file": "Results/results_SCENctax100_DATAitaly_STORyes.gdx",
-            "name": "results_SCENctax100_DATAitaly_STORyes.gdx",
+            "file": "Results/results_SCENctaxchanging_DATAitaly_STORyes.gdx",
+            "name": "results_SCENctaxchanging_DATAitaly_STORyes.gdx",
             "type": "gdx"
         },
         {
@@ -146,9 +118,10 @@
                 "--data = template --solvermode = mip",
                 "--data = template",
                 "--data = italy",
-                "--data = italy --solvermode = mip",
                 "",
-                "--data = italy --solvermode = mip --scen = ctax --value = 100"
+                "--data = italy --solvermode = mip --scen = ctax --value = 100",
+                "--data = italy --solvermode = mip --scen = ctax",
+                "--data = italy --solvermode = mip"
             ],
             "type": "gms"
         },
@@ -173,9 +146,10 @@
         "--data = template --solvermode = mip",
         "--data = template",
         "--data = italy",
-        "--data = italy --solvermode = mip",
         "",
-        "--data = italy --solvermode = mip --scen = ctax --value = 100"
+        "--data = italy --solvermode = mip --scen = ctax --value = 100",
+        "--data = italy --solvermode = mip --scen = ctax",
+        "--data = italy --solvermode = mip"
     ],
     "path": ".",
     "pf": "",

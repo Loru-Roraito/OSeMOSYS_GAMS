@@ -171,8 +171,7 @@ OutputActivityRatio(r,'PRODWST','WST',"1",y) = 1;
 OutputActivityRatio(r,'IMPBIO1','WBM',"1",y) = 1;
 OutputActivityRatio(r,'IMPHCO1','HCO',"1",y) = 1;
 OutputActivityRatio(r,'IMPGAS1','GAS',"1",y) = 1;
-OutputActivityRatio(r,'IMPDSL1','DSL',"1",y) = 1;
-OutputActivityRatio(r,'IMPGSL1','GSL',"1",y) = 1;
+OutputActivityRatio(r,'IMPOIL1','OIL',"1",y) = 1;
 
 
 $endif.ph

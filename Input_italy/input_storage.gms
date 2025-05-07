@@ -72,7 +72,7 @@ CapitalCost(r,'ICE_MELT',y) = 0;
 VariableCost(r,'ICE_MELT',m,y) = 0;
 FixedCost(r,'ICE_MELT',y) = 0;
 OperationalLife(r,'ICE_MELT') = 999;
-ResidualCapacity(r,'ICE_MELT',y) = melting_rate(y);
+ResidualCapacity(r,'ICE_MELT',y) = 999;
 TotalAnnualMaxCapacityInvestment(r,'ICE_MELT',y) = 0;
 
 AvailabilityFactor(r,'ICE_GROW',y) = 1;
@@ -116,7 +116,7 @@ InputActivityRatio(r,'ICE_GROW','ICE',"1",y) = 1;
 OutputActivityRatio(r,'ICE_GROW','ICE_PROD',"1",y) = 1;
 
 OutputActivityRatio(r,'ICE_MELT','ICE_MEL',"2",y) = 1;
-OutputActivityRatio(r,'ICE_MELT','HYDMEL',"2",y) = 0.1;
+OutputActivityRatio(r,'ICE_MELT','HYDMEL',"2",y) = %riverpercentage%;
 OutputActivityRatio(r,'ICE_MELT','DAMMEL',"2",y) = %dampercentage%;
 
 TechnologyToStorage(r,"1",'HEL','HYDROGEN') = 1;

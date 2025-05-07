@@ -40,7 +40,7 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
                 scenario == "SCENbase_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
@@ -53,7 +53,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("GLACIERS", "DAM", "HYDROGEN"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctax100_DATAitaly_STORyes")) +
+                scenario == "SCENctaxchanging_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
   theme_classic() + 
@@ -62,9 +62,9 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SRE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctax100_DATAitaly_STORyes")) +
+                scenario == "SCENctaxchanging_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
@@ -73,9 +73,9 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("COAL", "OCGT", "CCGT", "CHP", "OIL_GEN", "WTE", "SRE"),
+                TECHNOLOGY  %in% c("BIO", "COAL", "GPP", "OIL_GEN", "WTE"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctax100_DATAitaly_STORyes")) +
+                scenario == "SCENctaxchanging_DATAitaly_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
