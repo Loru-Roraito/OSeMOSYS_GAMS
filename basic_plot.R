@@ -29,31 +29,20 @@ long_ghg <- wide_ghg %>%
 #less basic plots
 ggplot(data = results %>% 
          filter(REGION == "ITALY", 
-                STORAGE %in% c("GLACIERS", "DAM", "HYDROGEN"), 
+                STORAGE %in% c("GLACIERS"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENbase_DATAitaly_STORyes")) +
+                scenario == "SCENbase_DATAitaly_base_STORyes")) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
-  theme_classic() + 
-  geom_hline(yintercept = 0, color = "grey")
-
-#less basic plots
-ggplot(data = results %>%  
-         filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
-                variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENbase_DATAitaly_STORyes")) +
-  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
-  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
   geom_hline(yintercept = 0, color = "grey")
 
 #less basic plots
 ggplot(data = results %>% 
          filter(REGION == "ITALY", 
-                STORAGE %in% c("GLACIERS", "DAM", "HYDROGEN"), 
+                STORAGE %in% c("DAM", "HYDROGEN"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctaxchanging_DATAitaly_STORyes")) +
+                scenario == "SCENbase_DATAitaly_base_STORyes")) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
   theme_classic() + 
@@ -62,9 +51,47 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctaxchanging_DATAitaly_STORyes")) +
+                scenario == "SCENbase_DATAitaly_base_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+
+
+
+
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("GLACIERS"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("DAM", "HYDROGEN"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 
@@ -73,9 +100,118 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("BIO", "COAL", "GPP", "OIL_GEN", "WTE"),
+                TECHNOLOGY  %in% c("ROM"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctaxchanging_DATAitaly_STORyes")) +
+                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("COAL", "GPP", "OIL_GEN"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+
+
+
+
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("GLACIERS"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENbase_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("DAM", "HYDROGEN"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENbase_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENbase_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+
+
+
+
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("GLACIERS"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENctaxchanging_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>% 
+         filter(REGION == "ITALY", 
+                STORAGE %in% c("DAM", "HYDROGEN"), 
+                variable == "StorageLevelYearStart", 
+                scenario == "SCENctaxchanging_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
+  ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers and Dams") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctaxchanging_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("ROM"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctaxchanging_DATAitaly_nonmelt_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("COAL", "GPP", "OIL_GEN"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctaxchanging_DATAitaly_nonmelt_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 

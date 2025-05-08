@@ -28,6 +28,7 @@ $onrecurse
 $if not set scen $setglobal scen base
 $if not set data $setglobal data template
 $if not set value $setglobal value ""
+$if not set custom $setglobal custom "base"
 $setglobal storage
 $include "Model/osemosys_dec.gms"
 * specify Model data
@@ -53,8 +54,8 @@ $endif.solvermode
 
 $include "Model/osemosys_res.gms"
 *$include "Model/report.gms"
-$if not set storage execute_unload 'Results/results_SCENbase_DATA%data%_STORno.gdx';
-$if set storage execute_unload 'Results/results_SCENbase_DATA%data%_STORyes.gdx';
+$if not set storage execute_unload 'Results/results_SCENbase_DATA%data%_%custom%_STORno.gdx';
+$if set storage execute_unload 'Results/results_SCENbase_DATA%data%_%custom%_STORyes.gdx';
 
 $ifthen.scen %scen%=="ctax" 
 EmissionsPenalty(r,'CO2',y) = %value%;
@@ -81,7 +82,7 @@ $endif.solvermode
 * create results in file SelResults.CSV
 $include "Model/osemosys_res.gms"
 *$include "Model/report.gms"
-$if not set storage execute_unload 'Results/results_SCEN%scen%%value%_DATA%data%_STORno.gdx';
-$if set storage execute_unload 'Results/results_SCEN%scen%%value%_DATA%data%_STORyes.gdx';
+$if not set storage execute_unload 'Results/results_SCEN%scen%%value%_DATA%data%_%custom%_STORno.gdx';
+$if set storage execute_unload 'Results/results_SCEN%scen%%value%_DATA%data%_%custom%_STORyes.gdx';
 
 $endif.notbase

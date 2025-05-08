@@ -1,10 +1,12 @@
 ** configuration options
-** prova
+
+$setglobal custom "base"
+*$setglobal custom "nonmelt"
 $setglobal storage 1
 $setglobal yearstart 2015
 $setglobal yearend 2100
-$setglobal initialvolume 19 #km3 ice volume in the glaciers
-$setglobal rains 36.5 #km3 rainfall/rivers that go into the dams unrelated to ice melt
+$setglobal initialvolume 19*12.07/0.9 #km3 ice volume in the glaciers * factor for the glacier model
+$setglobal initialrains 33.3 # km3 rainfall/rivers that go into the dams unrelated to ice melt
 $setglobal dampercentage 0.9 #melting ice that goes to the dams
 $setglobal riverpercentage 0.1 #melting ice that goes to the rivers
 $setglobal initialstorage 13.5 #km3 water in dams
@@ -25,6 +27,7 @@ set     DAILYTIMEBRACKET / 1, 2 /;
 
 parameter melting_rate(YEAR);
 parameter forming_rate(YEAR);
+parameter rains(YEAR); #km3
 
 Set yRange0(YEAR);
 Set yRange1(YEAR);
@@ -40,8 +43,14 @@ yRange3(YEAR) = yes$(YEAR.val >= 2040 and YEAR.val <= 2050);
 yRange4(YEAR) = yes$(YEAR.val >= 2050 and YEAR.val <= 2100);
 yNoCoal(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2100);
 
-melting_rate(y) = %initialvolume%*0.0164*exp(-0.0164*ord(y));
+melting_rate(y) = %initialvolume%-ord(y)*%initialvolume%*0.01;
 forming_rate(y) = 0;
+rains(y) = %initialrains%*0.0164*exp(-0.0164*ord(y));
+
+** nonmelt
+*rains(y) = %initialrains%;
+*melting_rate(y) = (%maxdamextraction% - rains(y))/%dampercentage%;
+*forming_rate(y) = melting_rate(y);
 
 # characterize technologies 
 set power_plants(TECHNOLOGY);

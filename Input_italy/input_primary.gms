@@ -156,7 +156,7 @@ VariableCost(r,'VIR_ICE',m,y) = 0;
 FixedCost(r,'VIR_ICE',y) = 0;
 OperationalLife(r,'VIR_ICE') = 999;
 AvailabilityFactor(r,'VIR_ICE',y) = 1;
-ResidualCapacity(r,"VIR_ICE",y) = 999;
+ResidualCapacity(r,"VIR_ICE",y) = forming_rate(y);
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=="popol"

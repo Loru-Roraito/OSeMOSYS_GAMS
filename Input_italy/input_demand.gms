@@ -28,17 +28,23 @@ AccumulatedAnnualDemand(r,"ED",y) = el_2015 + el_2015*ord(y)/200; # update: spli
 
 ** could instead update the equations of OSeMOSYS, but it's not working for now
 SpecifiedAnnualDemand(r,"IM",y) = melting_rate(y); # update: split into seasons (for some reason it becomes infeasible)
-AccumulatedAnnualDemand(r,"FI",y) = forming_rate(y);
+SpecifiedAnnualDemand(r,"FI",y) = forming_rate(y);
 AccumulatedAnnualDemand(r,"ID",y) = melting_rate(y)*%dampercentage%;
-AccumulatedAnnualDemand(r,"RD",y) = %rains%;
+AccumulatedAnnualDemand(r,"RD",y) = rains(y);
 
 parameter SpecifiedDemandProfile(r,f,l,y)/
-  ITALY.IM.ID.(%yearstart%*%yearend% )  .17
-  ITALY.IM.IN.(%yearstart%*%yearend% )  .16
-  ITALY.IM.SD.(%yearstart%*%yearend% )  .17
-  ITALY.IM.SN.(%yearstart%*%yearend% )  .16
-  ITALY.IM.WD.(%yearstart%*%yearend% )  .17
-  ITALY.IM.WN.(%yearstart%*%yearend% )  .17
+  ITALY.IM.ID.(%yearstart%*%yearend% )  .3
+  ITALY.IM.IN.(%yearstart%*%yearend% )  .1
+  ITALY.IM.SD.(%yearstart%*%yearend% )  .4
+  ITALY.IM.SN.(%yearstart%*%yearend% )  .1
+  ITALY.IM.WD.(%yearstart%*%yearend% )  .06
+  ITALY.IM.WN.(%yearstart%*%yearend% )  .04
+  ITALY.FI.ID.(%yearstart%*%yearend% )  .15
+  ITALY.FI.IN.(%yearstart%*%yearend% )  .25
+  ITALY.FI.SD.(%yearstart%*%yearend% )  .02
+  ITALY.FI.SN.(%yearstart%*%yearend% )  .08
+  ITALY.FI.WD.(%yearstart%*%yearend% )  .2
+  ITALY.FI.WN.(%yearstart%*%yearend% )  .3
 /;
 
 

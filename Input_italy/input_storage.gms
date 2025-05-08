@@ -25,16 +25,16 @@ CapitalCost(r,'HEL',YEAR)$(yRange1(YEAR)) = 1432-49*ord(YEAR);
 CapitalCost(r,'HEL',YEAR)$(yRange2(YEAR)) = 1180-32*ord(YEAR);
 CapitalCost(r,'HEL',YEAR)$(yRange3(YEAR)) = 552-7*ord(YEAR);
 CapitalCost(r,'HEL',YEAR)$(yRange4(YEAR)) = 314;
-VariableCost(r,'HEL',m,YEAR)$(yRange0(YEAR)) = 0;
-VariableCost(r,'HEL',m,YEAR)$(yRange1(YEAR)) = 0;
-VariableCost(r,'HEL',m,YEAR)$(yRange2(YEAR)) = 0;
-VariableCost(r,'HEL',m,YEAR)$(yRange3(YEAR)) = 0;
-VariableCost(r,'HEL',m,YEAR)$(yRange4(YEAR)) = 0;
+VariableCost(r,'HEL',m,YEAR)$(yRange0(YEAR)) = 1e-5;
+VariableCost(r,'HEL',m,YEAR)$(yRange1(YEAR)) = 1e-5;
+VariableCost(r,'HEL',m,YEAR)$(yRange2(YEAR)) = 1e-5;
+VariableCost(r,'HEL',m,YEAR)$(yRange3(YEAR)) = 1e-5;
+VariableCost(r,'HEL',m,YEAR)$(yRange4(YEAR)) = 1e-5;
 FixedCost(r,'HEL',YEAR)$(yRange0(YEAR)) = 47.52;
 FixedCost(r,'HEL',YEAR)$(yRange1(YEAR)) = 57.26-1.95*ord(YEAR);
 FixedCost(r,'HEL',YEAR)$(yRange2(YEAR)) = 39.65-0.77*ord(YEAR);
 FixedCost(r,'HEL',YEAR)$(yRange3(YEAR)) = 39.65-0.77*ord(YEAR);
-FixedCost(r,'HEL',YEAR)$(yRange4(YEAR)) =12.56;
+FixedCost(r,'HEL',YEAR)$(yRange4(YEAR)) = 12.56;
 ResidualCapacity(r,'HEL',y) = 999;
 
 # characterize dam hydro storage
@@ -56,7 +56,7 @@ CapitalCost(r,'INPUT_HYDRO',y) = 0;
 VariableCost(r,'INPUT_HYDRO',m,y) = 0;
 FixedCost(r,'INPUT_HYDRO',y) = 0;
 OperationalLife(r,'INPUT_HYDRO') = 999;
-ResidualCapacity(r,'INPUT_HYDRO',y) = %rains%;
+ResidualCapacity(r,'INPUT_HYDRO',y) = rains(y);
 TotalAnnualMaxCapacityInvestment(r,'INPUT_HYDRO',y) = 0;
 
 AvailabilityFactor(r,'WATER_HYDRO',y) = 1;
@@ -64,7 +64,7 @@ CapitalCost(r,'WATER_HYDRO',y) = 0;
 VariableCost(r,'WATER_HYDRO',m,y) = 0;
 FixedCost(r,'WATER_HYDRO',y) = 0;
 OperationalLife(r,'WATER_HYDRO') = 999;
-ResidualCapacity(r,'WATER_HYDRO',y) = 500;
+ResidualCapacity(r,'WATER_HYDRO',y) = melting_rate(y)*%dampercentage%;
 TotalAnnualMaxCapacityInvestment(r,'WATER_HYDRO',y) = 0;
 
 AvailabilityFactor(r,'ICE_MELT',y) = 1;
@@ -80,7 +80,7 @@ CapitalCost(r,'ICE_GROW',y) = 0;
 VariableCost(r,'ICE_GROW',m,y) = 0;
 FixedCost(r,'ICE_GROW',y) = 0;
 OperationalLife(r,'ICE_GROW') = 999;
-ResidualCapacity(r,'ICE_GROW',y) = forming_rate(y);
+ResidualCapacity(r,'ICE_GROW',y) = 999;
 TotalAnnualMaxCapacityInvestment(r,'ICE_GROW',y) = 0;
 
 CapitalCostStorage(r,'HYDROGEN',y) = 100;
@@ -90,6 +90,7 @@ StorageLevelStart(r,'HYDROGEN') = 0;
 CapitalCostStorage(r,'DAM',y) = 100;
 ResidualStorageCapacity(r,'DAM',y) = %initialstorage%;
 StorageLevelStart(r,'DAM') = 10;
+StorageLowerLimit(r,'DAM',y) = 2;
 
 CapitalCostStorage(r,'GLACIERS',y) = 100;
 ResidualStorageCapacity(r,'GLACIERS',y) = 999;
@@ -100,8 +101,8 @@ StorageLevelStart(r,'GLACIERS') = %initialvolume%;
 $elseif.ph %phase%=='popol'
 
 
-InputActivityRatio(r,'HEL','ELC',"1",y) = 2; #IEA convention
-OutputActivityRatio(r,'HEL','ELC',"2",y) = 0.6; #IEA convention
+InputActivityRatio(r,'HEL','ELC',"1",y) = 1;
+OutputActivityRatio(r,'HEL','ELC',"2",y) = 0.6;
 
 InputActivityRatio(r,'INPUT_HYDRO','HYD',"1",y) = 1;
 OutputActivityRatio(r,'INPUT_HYDRO','WAT_IN',"1",y) = 1;
