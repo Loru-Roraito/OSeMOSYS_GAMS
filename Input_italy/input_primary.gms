@@ -77,7 +77,7 @@ VariableCost(r,'IMPHCO1',m,YEAR)$(yRange4(YEAR)) = 16.7;
 FixedCost(r,'IMPHCO1',y) = 0;
 OperationalLife(r,'IMPHCO1') = 999;
 AvailabilityFactor(r,'IMPHCO1',y) = 1;
-EmissionActivityRatio(r,'IMPHCO1','CO2','1',y) = 0.089;
+EmissionActivityRatio(r,'IMPHCO1','CO2','1',y) = 0.338;
 ResidualCapacity(r,"IMPHCO1",y) = 999;
 
 CapitalCost(r,'IMPOIL1',y) = 0;
@@ -89,7 +89,7 @@ VariableCost(r,'IMPOIL1',m,YEAR)$(yRange4(YEAR)) = 110.9;
 FixedCost(r,'IMPOIL1',y) = 0;
 OperationalLife(r,'IMPOIL1') = 999;
 AvailabilityFactor(r,'IMPOIL1',y) = 1;
-EmissionActivityRatio(r,'IMPOIL1','CO2','1',y) = 0.075;
+EmissionActivityRatio(r,'IMPOIL1','CO2','1',y) = 0.264;
 ResidualCapacity(r,"IMPOIL1",y) = 999;
 
 CapitalCost(r,'IMPGAS1',y) = 0;
@@ -101,7 +101,7 @@ VariableCost(r,'IMPGAS1',m,YEAR)$(yRange4(YEAR)) = 40.7;
 FixedCost(r,'IMPGAS1',y) = 0;
 OperationalLife(r,'IMPGAS1') = 999;
 AvailabilityFactor(r,'IMPGAS1',y) = 1;
-EmissionActivityRatio(r,'IMPGAS1','CO2','1',y) = 0.055;
+EmissionActivityRatio(r,'IMPGAS1','CO2','1',y) = 0.201;
 ResidualCapacity(r,"IMPGAS1",y) = 999;
 
 CapitalCost(r,'IMPBIO1',y) = 0;
@@ -113,6 +113,7 @@ VariableCost(r,'IMPBIO1',m,YEAR)$(yRange4(YEAR)) = 18.32;
 FixedCost(r,'IMPBIO1',y) = 0;
 OperationalLife(r,'IMPBIO1') = 999;
 AvailabilityFactor(r,'IMPBIO1',y) = 1;
+EmissionActivityRatio(r,'IMPGAS1','CO2','1',y) = 0.127;
 ResidualCapacity(r,"IMPBIO1",y) = 999;
 
 

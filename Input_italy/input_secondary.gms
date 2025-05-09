@@ -32,12 +32,12 @@ $elseif.ph %phase%=='data'
 
 # Characterize SOLAR technology
 OperationalLife(r,'SPV') = 25;
-CapacityFactor(r,'SPV','ID',y) = 0.4;
-CapacityFactor(r,'SPV','IN',y) = 0;
-CapacityFactor(r,'SPV','SD',y) = 0.8;
-CapacityFactor(r,'SPV','SN',y) = 0;
+CapacityFactor(r,'SPV','ID',y) = 0.175;
+CapacityFactor(r,'SPV','IN',y) = 1e-5;
+CapacityFactor(r,'SPV','SD',y) = 0.35;
+CapacityFactor(r,'SPV','SN',y) = 1e-5;
 CapacityFactor(r,'SPV','WD',y) = 0.1;
-CapacityFactor(r,'SPV','WN',y) = 0;
+CapacityFactor(r,'SPV','WN',y) = 1e-5;
 CapitalCost(r,'SPV',YEAR)$(yRange0(YEAR)) = 560;
 CapitalCost(r,'SPV',YEAR)$(yRange1(YEAR)) = 650-18*ord(YEAR);
 CapitalCost(r,'SPV',YEAR)$(yRange2(YEAR)) = 470-6*ord(YEAR);
@@ -53,17 +53,18 @@ FixedCost(r,'SPV',YEAR)$(yRange1(YEAR)) = 12.2-0.18*ord(YEAR);
 FixedCost(r,'SPV',YEAR)$(yRange2(YEAR)) = 11.6-0.14*ord(YEAR);
 FixedCost(r,'SPV',YEAR)$(yRange3(YEAR)) = 9.85-0.07*ord(YEAR);
 FixedCost(r,'SPV',YEAR)$(yRange4(YEAR)) = 7.4;
-ResidualCapacity(r,"SPV",y) = 53.981;
-TotalAnnualMaxCapacityInvestment(r,'SPV',y) = 5.4; # update
+ResidualCapacity(r,"SPV",y) = 18.9;
+TotalAnnualMaxCapacityInvestment(r,'SPV',YEAR)$(yCurrent(YEAR)) = 1;
+TotalAnnualMaxCapacityInvestment(r,'SPV',YEAR)$(not yCurrent(YEAR)) = 7;  
 
 # Characterize WIND technology (onshore)
 OperationalLife(r,'WPP') = 25;
-CapacityFactor(r,'WPP','ID',y) = 0.2;
-CapacityFactor(r,'WPP','IN',y) = 0.3;
-CapacityFactor(r,'WPP','SD',y) = 0.1;
-CapacityFactor(r,'WPP','SN',y) = 0.15;
-CapacityFactor(r,'WPP','WD',y) = 0.3;
-CapacityFactor(r,'WPP','WN',y) = 0.4;
+CapacityFactor(r,'WPP','ID',y) = 0.18;
+CapacityFactor(r,'WPP','IN',y) = 0.2;
+CapacityFactor(r,'WPP','SD',y) = 0.08;
+CapacityFactor(r,'WPP','SN',y) = 0.1;
+CapacityFactor(r,'WPP','WD',y) = 0.28;
+CapacityFactor(r,'WPP','WN',y) = 0.3;
 CapitalCost(r,'WPP',YEAR)$(yRange0(YEAR)) = 1120;
 CapitalCost(r,'WPP',YEAR)$(yRange1(YEAR)) = 1160-8*ord(YEAR);
 CapitalCost(r,'WPP',YEAR)$(yRange2(YEAR)) = 1130-6*ord(YEAR);
@@ -79,8 +80,9 @@ FixedCost(r,'WPP',YEAR)$(yRange1(YEAR)) = 14.7-0.14*ord(YEAR);
 FixedCost(r,'WPP',YEAR)$(yRange2(YEAR)) = 14.11-0.1*ord(YEAR);
 FixedCost(r,'WPP',YEAR)$(yRange3(YEAR)) = 12.22-0.03*ord(YEAR);
 FixedCost(r,'WPP',YEAR)$(yRange4(YEAR)) = 11.34;
-ResidualCapacity(r,"WPP",y) = 29.688;
-TotalAnnualMaxCapacityInvestment(r,'WPP',y) = 3;
+ResidualCapacity(r,"WPP",y) = 9;
+TotalAnnualMaxCapacityInvestment(r,'WPP',YEAR)$(yCurrent(YEAR)) = 0.5;
+TotalAnnualMaxCapacityInvestment(r,'WPP',YEAR)$(not yCurrent(YEAR)) = 4;
 
 # Characterize WASTE-TO-ENERGY technology
 OperationalLife(r,'WTE') = 25;
@@ -99,32 +101,34 @@ FixedCost(r,'WTE',YEAR)$(yRange1(YEAR)) = 31.06-0.45*ord(YEAR);
 FixedCost(r,'WTE',YEAR)$(yRange2(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'WTE',YEAR)$(yRange3(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'WTE',YEAR)$(yRange4(YEAR)) = 23.31;
-ResidualCapacity(r,"WTE",y) = 19.084;
-TotalAnnualMaxCapacityInvestment(r,'WTE',y) = 1.9;
+ResidualCapacity(r,"WTE",y) = 0;
+TotalAnnualMaxCapacityInvestment(r,'WTE',y) = 0;
 
 # Characterize BIOMASS technology
 OperationalLife(r,'BIO') = 25;
-AvailabilityFactor(r,'BIO',y) = 0.85;
+AvailabilityFactor(r,'BIO',y) = 0.62;
 CapitalCost(r,'BIO',YEAR)$(yRange0(YEAR)) = 2135;
 CapitalCost(r,'BIO',YEAR)$(yRange1(YEAR)) = 2157-5*ord(YEAR);
 CapitalCost(r,'BIO',YEAR)$(yRange2(YEAR)) = 2226-9*ord(YEAR);
 CapitalCost(r,'BIO',YEAR)$(yRange3(YEAR)) = 2204-8*ord(YEAR);
 CapitalCost(r,'BIO',YEAR)$(yRange4(YEAR)) = 1917;
-VariableCost(r,'BIO',m,YEAR)$(yRange0(YEAR)) = 2.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange1(YEAR)) = 2.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange2(YEAR)) = 2.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange3(YEAR)) = 2.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange4(YEAR)) = 2.56;
+VariableCost(r,'BIO',m,YEAR)$(yRange0(YEAR)) = 200.56;
+VariableCost(r,'BIO',m,YEAR)$(yRange1(YEAR)) = 200.56;
+VariableCost(r,'BIO',m,YEAR)$(yRange2(YEAR)) = 200.56;
+VariableCost(r,'BIO',m,YEAR)$(yRange3(YEAR)) = 200.56;
+VariableCost(r,'BIO',m,YEAR)$(yRange4(YEAR)) = 200.56;
 FixedCost(r,'BIO',YEAR)$(yRange0(YEAR)) = 28.81;
 FixedCost(r,'BIO',YEAR)$(yRange1(YEAR)) = 31.06-0.45*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange2(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange3(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange4(YEAR)) = 23.31;
-ResidualCapacity(r,"BIO",y) = 40;
-TotalAnnualMaxCapacityInvestment(r,'BIO',y) = 4;
+ResidualCapacity(r,"BIO",y) = 4;
+TotalAnnualMaxCapacityInvestment(r,'BIO',y) = 0.04;
+TotalAnnualMaxCapacityInvestment(r,'BIO',YEAR)$(yCurrent(YEAR)) = 0;
 
 # Characterize GEOTHERMAL technology
 OperationalLife(r,'GEO') = 30;
+AvailabilityFactor(r,'GEO',y) = 0.85;
 CapitalCost(r,'GEO',YEAR)$(yRange0(YEAR)) = 4970;
 CapitalCost(r,'GEO',YEAR)$(yRange1(YEAR)) = 4970;
 CapitalCost(r,'GEO',YEAR)$(yRange2(YEAR)) = 4970;
@@ -140,12 +144,12 @@ FixedCost(r,'GEO',YEAR)$(yRange1(YEAR)) = 95;
 FixedCost(r,'GEO',YEAR)$(yRange2(YEAR)) = 95;
 FixedCost(r,'GEO',YEAR)$(yRange3(YEAR)) = 92;
 FixedCost(r,'GEO',YEAR)$(yRange4(YEAR)) = 92;
-ResidualCapacity(r,"GEO",y) = 24.736;
-TotalAnnualMaxCapacityInvestment(r,'GEO',y) = 2.5;
+ResidualCapacity(r,"GEO",y) = 0.82;
+TotalAnnualMaxCapacityInvestment(r,'GEO',y) = 0.0082;
 
 # Characterize RUN-OF-RIVER technology
 OperationalLife(r,'ROR') = 55;
-AvailabilityFactor(r,'ROR',y) = 0.27;
+AvailabilityFactor(r,'ROR',y) = 0.35;
 CapitalCost(r,'ROR',YEAR)$(yRange0(YEAR)) = 2440;
 CapitalCost(r,'ROR',YEAR)$(yRange1(YEAR)) = 2440;
 CapitalCost(r,'ROR',YEAR)$(yRange2(YEAR)) = 2440;
@@ -161,11 +165,11 @@ FixedCost(r,'ROR',YEAR)$(yRange1(YEAR)) = 210.48;
 FixedCost(r,'ROR',YEAR)$(yRange2(YEAR)) = 244.2-2.25*ord(YEAR);
 FixedCost(r,'ROR',YEAR)$(yRange3(YEAR)) = 198-0.4*ord(YEAR);
 FixedCost(r,'ROR',YEAR)$(yRange4(YEAR)) = 184;
-ResidualCapacity(r,"ROR",y) = 173.959;
-TotalAnnualMaxCapacityInvestment(r,'ROR',y) = 0;
+ResidualCapacity(r,"ROR",y) = 5.7;
+TotalAnnualMaxCapacityInvestment(r,'ROR',y) = 0.02;
 
-OperationalLife(r,'ROM') = 80;
-AvailabilityFactor(r,'ROM',y) = 0.27;
+OperationalLife(r,'ROM') = 55;
+AvailabilityFactor(r,'ROM',y) = 0.4;
 CapitalCost(r,'ROM',YEAR)$(yRange0(YEAR)) = 2440;
 CapitalCost(r,'ROM',YEAR)$(yRange1(YEAR)) = 2440;
 CapitalCost(r,'ROM',YEAR)$(yRange2(YEAR)) = 2440;
@@ -181,7 +185,7 @@ FixedCost(r,'ROM',YEAR)$(yRange1(YEAR)) = 210.48;
 FixedCost(r,'ROM',YEAR)$(yRange2(YEAR)) = 244.2-2.25*ord(YEAR);
 FixedCost(r,'ROM',YEAR)$(yRange3(YEAR)) = 198-0.4*ord(YEAR);
 FixedCost(r,'ROM',YEAR)$(yRange4(YEAR)) = 184;
-ResidualCapacity(r,"ROM",y) = melting_rate(y)*%riverpercentage%/0.27;
+ResidualCapacity(r,"ROM",y) = melting_rate(y)*%riverpercentage%/0.4;
 TotalAnnualMaxCapacityInvestment(r,'ROM',y) = 0;
 
 # Characterize COAL technology
@@ -202,14 +206,13 @@ FixedCost(r,'COAL',YEAR)$(yRange1(YEAR)) = 47.76-0.19*ord(YEAR);
 FixedCost(r,'COAL',YEAR)$(yRange2(YEAR)) = 46.41-0.1*ord(YEAR);
 FixedCost(r,'COAL',YEAR)$(yRange3(YEAR)) = 48.92-0.2*ord(YEAR);
 FixedCost(r,'COAL',YEAR)$(yRange4(YEAR)) = 41.91;
-ResidualCapacity(r,"COAL",y) = 60;
+ResidualCapacity(r,"COAL",YEAR)$(not yNoCoal(YEAR)) = 6.4-0.32*ord(YEAR);
 ResidualCapacity(r,"COAL",YEAR)$(yNoCoal(YEAR)) = 0;
-TotalAnnualMaxCapacityInvestment(r,'COAL',y) = 1;
-TotalAnnualMaxCapacityInvestment(r,'COAL',YEAR)$(yNoCoal(YEAR)) = 0;
+TotalAnnualMaxCapacityInvestment(r,'COAL',y)= 0;
 
 # Characterize GPP technology
 OperationalLife(r,'GPP') = 30;
-AvailabilityFactor(r,'GPP',y) = 0.8;
+AvailabilityFactor(r,'GPP',y) = 0.9;
 CapitalCost(r,'GPP',YEAR)$(yRange0(YEAR)) = 720;
 CapitalCost(r,'GPP',YEAR)$(yRange1(YEAR)) = 735-3*ord(YEAR);
 CapitalCost(r,'GPP',YEAR)$(yRange2(YEAR)) = 735-3*ord(YEAR);
@@ -225,8 +228,11 @@ FixedCost(r,'GPP',YEAR)$(yRange1(YEAR)) = 15;
 FixedCost(r,'GPP',YEAR)$(yRange2(YEAR)) = 15;
 FixedCost(r,'GPP',YEAR)$(yRange3(YEAR)) = 15;
 FixedCost(r,'GPP',YEAR)$(yRange4(YEAR)) = 15;
-ResidualCapacity(r,"GPP",y) = 60;
-TotalAnnualMaxCapacityInvestment(r,'GPP',y) = 6;
+ResidualCapacity(r,"GPP",YEAR)$(not yNoCO2(YEAR)) = 17.85-0.51*ord(YEAR);
+ResidualCapacity(r,"GPP",YEAR)$(yCurrent(YEAR)) = 14;
+ResidualCapacity(r,"GPP",YEAR)$(yNoCO2(YEAR)) = 0;
+TotalAnnualMaxCapacityInvestment(r,'GPP',YEAR)$(not yNoCO2(YEAR)) = 0.14;
+TotalAnnualMaxCapacityInvestment(r,'GPP',YEAR)$(yNoCO2(YEAR)) = 0;
 
 # Characterize OCGT technology
 OperationalLife(r,'OCGT') = 30;
@@ -297,12 +303,14 @@ FixedCost(r,'OIL_GEN',YEAR)$(yRange1(YEAR)) = 20.71;
 FixedCost(r,'OIL_GEN',YEAR)$(yRange2(YEAR)) = 20.71;
 FixedCost(r,'OIL_GEN',YEAR)$(yRange3(YEAR)) = 20.71;
 FixedCost(r,'OIL_GEN',YEAR)$(yRange4(YEAR)) = 20.71;
-ResidualCapacity(r,"OIL_GEN",y) = 34.990;
-TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',y) = 3.5;
+ResidualCapacity(r,"OIL_GEN",YEAR)$(not yNoCO2(YEAR)) = 2.6-0.074*ord(YEAR);
+ResidualCapacity(r,"OIL_GEN",YEAR)$(not yCurrent(YEAR)) = 2;
+ResidualCapacity(r,"OIL_GEN",YEAR)$(yNoCO2(YEAR)) = 0;
+TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',YEAR)$(not yNoCO2(YEAR)) = 0.02;
+TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',YEAR)$(yNoCO2(YEAR)) = 0;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=='popol'
-#update efficiencies
 
 InputActivityRatio(r,'SPV','SUN',"1",y) = 1; #IEA convention
 OutputActivityRatio(r,'SPV','ELC',"1",y) = 1; 
@@ -313,13 +321,13 @@ OutputActivityRatio(r,'WPP','ELC',"1",y) = 1;
 InputActivityRatio(r,'WTE','WST',"1",y) = 1/0.25; 
 OutputActivityRatio(r,'WTE','ELC',"1",y) = 1;
 
-InputActivityRatio(r,'BIO','WBM',"1",y) = 1/0.25;
+InputActivityRatio(r,'BIO','WBM',"1",y) = 1/0.9;
 OutputActivityRatio(r,'BIO','ELC',"1",y) = 1;
 
-InputActivityRatio(r,'GEO','GTH',"1",y) = 1/0.25;
+InputActivityRatio(r,'GEO','GTH',"1",y) = 1;
 OutputActivityRatio(r,'GEO','ELC',"1",y) = 1;
 
-InputActivityRatio(r,'COAL','HCO',"1",y) = 1/0.45;
+InputActivityRatio(r,'COAL','HCO',"1",y) = 1/0.4;
 OutputActivityRatio(r,'COAL','ELC',"1",y) = 1;
 
 InputActivityRatio(r,'ROR','HYD',"1",y) = 1;
@@ -343,10 +351,10 @@ OutputActivityRatio(r,'CCGT','ELC',"1",y) = 1;
 OutputActivityRatio(r,'CCGT','ELC',"2",y) = 1;
 
 ** oil power plants
-InputActivityRatio(r,'OIL_GEN','OIL',"1",y) = 1/0.2;
+InputActivityRatio(r,'OIL_GEN','OIL',"1",y) = 1/0.5;
 OutputActivityRatio(r,'OIL_GEN','ELC',"1",y) = 1;
 
-InputActivityRatio(r,'GPP','GAS',"1",y) = 1/0.35;
+InputActivityRatio(r,'GPP','GAS',"1",y) = 1/0.6;
 OutputActivityRatio(r,'GPP','ELC',"1",y) = 1;
 
 $endif.ph

@@ -60,8 +60,7 @@ $if set storage execute_unload 'Results/results_SCENbase_DATA%data%_%custom%_STO
 $ifthen.scen %scen%=="ctax" 
 EmissionsPenalty(r,'CO2',y) = %value%;
 $elseif.scen %scen%=="ctaxchanging" 
-EmissionsPenalty(r,'CO2',y)$(ord(y) le 39) = 50-4/(1-40/ord(y));
-EmissionsPenalty(r,'CO2',y)$(ord(y) ge 40) = 206;
+EmissionsPenalty(r,'CO2',y) = 50-100/(1-100/ord(y));
 $elseif.scen %scen%=="emicap" 
 AnnualEmissionLimit(r,'CO2',y)$(ord(y) ge 10) = %value%;
 $elseif.scen %scen%=="nocoal" 

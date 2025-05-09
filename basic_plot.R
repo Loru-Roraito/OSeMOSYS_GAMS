@@ -51,7 +51,7 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
                 scenario == "SCENbase_DATAitaly_base_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
@@ -89,7 +89,18 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "GEO", "SPV", "WPP"),
+                variable == "TotalTechnologyAnnualActivity", 
+                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+  geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
+  ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
+  theme_classic() + 
+  geom_hline(yintercept = 0, color = "grey")
+
+#less basic plots
+ggplot(data = results %>%  
+         filter(REGION == "ITALY", 
+                TECHNOLOGY  %in% c("STOR_HYDRO"),
                 variable == "TotalTechnologyAnnualActivity", 
                 scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
@@ -149,7 +160,7 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "ROM", "OIL_GEN", "BIO", "GEO", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
                 scenario == "SCENbase_DATAitaly_nonmelt_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
@@ -187,7 +198,7 @@ ggplot(data = results %>%
 #less basic plots
 ggplot(data = results %>%  
          filter(REGION == "ITALY", 
-                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "GEO", "WTE", "SPV", "WPP"),
+                TECHNOLOGY  %in% c("ROM", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "GEO", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
                 scenario == "SCENctaxchanging_DATAitaly_nonmelt_STORyes")) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +

@@ -6,13 +6,14 @@ $ifthen.ph %phase%=='sets'
 set     STORAGE / DAM, HYDROGEN, GLACIERS /;
 
 SET TECHNOLOGY /HEL   "Hydrogen Electrolyzers",
-                STOR_HYDRO 'Pumped storage',
+                PUMP_HYDRO 'Pumped storage (IN)',
+                STOR_HYDRO 'Pumped storage (OUT)',
                 INPUT_HYDRO 'Hydro input',
                 WATER_HYDRO 'Water storage',
                 ICE_GROW   'Glacier formation',
                 ICE_MELT   'Glacier melting'/;
 
-set storage_plants(TECHNOLOGY) / HEL, STOR_HYDRO, ICE_GROW, ICE_MELT /;
+set storage_plants(TECHNOLOGY) / HEL, PUMP_HYDRO, STOR_HYDRO, INPUT_HYDRO, WATER_HYDRO, ICE_GROW, ICE_MELT /;
 
 ** ------------------------------------------------
 $elseif.ph %phase%=='data' 
@@ -48,6 +49,19 @@ CapitalCost(r,'STOR_HYDRO',y) = 1000;
 VariableCost(r,'STOR_HYDRO',m,y) = 0;
 FixedCost(r,'STOR_HYDRO',y) = 0;
 OperationalLife(r,'STOR_HYDRO') = 60;
+ResidualCapacity(r,'STOR_HYDRO',y) = 0.053;
+TotalAnnualMaxCapacityInvestment(r,'STOR_HYDRO',y) = 0;
+
+CapacityFactor(r,'STOR_HYDRO',"ID",y) = 0.7;
+CapacityFactor(r,'STOR_HYDRO',"IN",y) = 0.7;
+CapacityFactor(r,'STOR_HYDRO',"SD",y) = 0.3;
+CapacityFactor(r,'STOR_HYDRO',"SN",y) = 0.3;
+CapacityFactor(r,'STOR_HYDRO',"WD",y) = 0.5;
+CapacityFactor(r,'STOR_HYDRO',"WN",y) = 0.5;
+CapitalCost(r,'STOR_HYDRO',y) = 1000;
+VariableCost(r,'STOR_HYDRO',m,y) = 0;
+FixedCost(r,'STOR_HYDRO',y) = 0;
+OperationalLife(r,'STOR_HYDRO') = 60;
 ResidualCapacity(r,'STOR_HYDRO',y) = %maxdamextraction%/0.55;
 TotalAnnualMaxCapacityInvestment(r,'STOR_HYDRO',y) = 0;
 
@@ -56,7 +70,7 @@ CapitalCost(r,'INPUT_HYDRO',y) = 0;
 VariableCost(r,'INPUT_HYDRO',m,y) = 0;
 FixedCost(r,'INPUT_HYDRO',y) = 0;
 OperationalLife(r,'INPUT_HYDRO') = 999;
-ResidualCapacity(r,'INPUT_HYDRO',y) = rains(y);
+ResidualCapacity(r,'INPUT_HYDRO',y) = %rains%;
 TotalAnnualMaxCapacityInvestment(r,'INPUT_HYDRO',y) = 0;
 
 AvailabilityFactor(r,'WATER_HYDRO',y) = 1;
@@ -72,7 +86,7 @@ CapitalCost(r,'ICE_MELT',y) = 0;
 VariableCost(r,'ICE_MELT',m,y) = 0;
 FixedCost(r,'ICE_MELT',y) = 0;
 OperationalLife(r,'ICE_MELT') = 999;
-ResidualCapacity(r,'ICE_MELT',y) = 999;
+ResidualCapacity(r,'ICE_MELT',y) = melting_rate(y);
 TotalAnnualMaxCapacityInvestment(r,'ICE_MELT',y) = 0;
 
 AvailabilityFactor(r,'ICE_GROW',y) = 1;
@@ -80,17 +94,16 @@ CapitalCost(r,'ICE_GROW',y) = 0;
 VariableCost(r,'ICE_GROW',m,y) = 0;
 FixedCost(r,'ICE_GROW',y) = 0;
 OperationalLife(r,'ICE_GROW') = 999;
-ResidualCapacity(r,'ICE_GROW',y) = 999;
+ResidualCapacity(r,'ICE_GROW',y) = forming_rate(y);
 TotalAnnualMaxCapacityInvestment(r,'ICE_GROW',y) = 0;
 
 CapitalCostStorage(r,'HYDROGEN',y) = 100;
-ResidualStorageCapacity(r,'HYDROGEN',y) = 999;
+ResidualStorageCapacity(r,'HYDROGEN',y) = 10;
 StorageLevelStart(r,'HYDROGEN') = 0;
 
-CapitalCostStorage(r,'DAM',y) = 100;
+CapitalCostStorage(r,'DAM',y) = 99999999; # UPDATE
 ResidualStorageCapacity(r,'DAM',y) = %initialstorage%;
 StorageLevelStart(r,'DAM') = 10;
-StorageLowerLimit(r,'DAM',y) = 2;
 
 CapitalCostStorage(r,'GLACIERS',y) = 100;
 ResidualStorageCapacity(r,'GLACIERS',y) = 999;
@@ -110,7 +123,7 @@ OutputActivityRatio(r,'INPUT_HYDRO','WAT_IN',"1",y) = 1;
 InputActivityRatio(r,'WATER_HYDRO','DAMMEL',"1",y) = 1;
 OutputActivityRatio(r,'WATER_HYDRO','WAT_DAM',"1",y) = 1;
 
-InputActivityRatio(r,'STOR_HYDRO','ELC',"1",y) = 1.33 * 45.39 / 37;
+InputActivityRatio(r,'PUMP_HYDRO','ELC',"1",y) = 1.33 * 45.39 / 37;
 OutputActivityRatio(r,'STOR_HYDRO','ELC',"2",y) = 45.39 / 37;
 
 InputActivityRatio(r,'ICE_GROW','ICE',"1",y) = 1;
@@ -125,7 +138,7 @@ TechnologyFromStorage(r,"2",'HEL','HYDROGEN') = 1;
 
 TechnologyToStorage(r,"1",'WATER_HYDRO','DAM') = 1;
 TechnologyToStorage(r,"1",'INPUT_HYDRO','DAM') = 1;
-TechnologyToStorage(r,"1",'STOR_HYDRO','DAM') = 1;
+TechnologyToStorage(r,"1",'PUMP_HYDRO','DAM') = 1;
 TechnologyFromStorage(r,"2",'STOR_HYDRO','DAM') = 1;
 
 TechnologyToStorage(r,"1",'ICE_GROW','GLACIERS') = 1;
