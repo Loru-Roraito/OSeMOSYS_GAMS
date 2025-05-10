@@ -5,9 +5,6 @@ $ifthen.ph %phase%=='sets'
 
 set     TECHNOLOGY      /
         COAL 'Coal power plants'
-        OCGT 'Open cycle gas turbines'
-        CCGT 'Combined cycle gas turbines'
-        CHP 'Cogeneration plants'
         GPP 'Gas power plants'
         ROR 'run-of-river hydroelectric power plants'
         ROM 'Run-of-melted hydroelectric power plants'
@@ -21,7 +18,7 @@ set     TECHNOLOGY      /
 set    FUEL            /
         ELC 'Electricity' /; 
 
-set power_plants(TECHNOLOGY)   / COAL, OCGT, CCGT, CHP, ROR, ROM, OIL_GEN, BIO, GEO, WTE, SPV, WPP, GPP /;
+set power_plants(TECHNOLOGY)   / COAL, ROR, ROM, OIL_GEN, BIO, GEO, WTE, SPV, WPP, GPP /;
 set fuel_transformation(TECHNOLOGY) / /;
 set renewable_tech(TECHNOLOGY) / SPV, WPP, WTE, BIO, GEO, ROR, ROM /;
 
@@ -55,7 +52,7 @@ FixedCost(r,'SPV',YEAR)$(yRange3(YEAR)) = 9.85-0.07*ord(YEAR);
 FixedCost(r,'SPV',YEAR)$(yRange4(YEAR)) = 7.4;
 ResidualCapacity(r,"SPV",y) = 18.9;
 TotalAnnualMaxCapacityInvestment(r,'SPV',YEAR)$(yCurrent(YEAR)) = 1;
-TotalAnnualMaxCapacityInvestment(r,'SPV',YEAR)$(not yCurrent(YEAR)) = 7;  
+TotalAnnualMaxCapacityInvestment(r,'SPV',YEAR)$(not yCurrent(YEAR)) = 10.5;  
 
 # Characterize WIND technology (onshore)
 OperationalLife(r,'WPP') = 25;
@@ -82,10 +79,11 @@ FixedCost(r,'WPP',YEAR)$(yRange3(YEAR)) = 12.22-0.03*ord(YEAR);
 FixedCost(r,'WPP',YEAR)$(yRange4(YEAR)) = 11.34;
 ResidualCapacity(r,"WPP",y) = 9;
 TotalAnnualMaxCapacityInvestment(r,'WPP',YEAR)$(yCurrent(YEAR)) = 0.5;
-TotalAnnualMaxCapacityInvestment(r,'WPP',YEAR)$(not yCurrent(YEAR)) = 4;
+TotalAnnualMaxCapacityInvestment(r,'WPP',YEAR)$(not yCurrent(YEAR)) = 6.5;
 
 # Characterize WASTE-TO-ENERGY technology
 OperationalLife(r,'WTE') = 25;
+AvailabilityFactor(r,'BIO',y) = 0.62;
 CapitalCost(r,'WTE',YEAR)$(yRange0(YEAR)) = 2135;
 CapitalCost(r,'WTE',YEAR)$(yRange1(YEAR)) = 2157-4*ord(YEAR);
 CapitalCost(r,'WTE',YEAR)$(yRange2(YEAR)) = 2226-9*ord(YEAR);
@@ -101,8 +99,8 @@ FixedCost(r,'WTE',YEAR)$(yRange1(YEAR)) = 31.06-0.45*ord(YEAR);
 FixedCost(r,'WTE',YEAR)$(yRange2(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'WTE',YEAR)$(yRange3(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'WTE',YEAR)$(yRange4(YEAR)) = 23.31;
-ResidualCapacity(r,"WTE",y) = 0;
-TotalAnnualMaxCapacityInvestment(r,'WTE',y) = 0;
+ResidualCapacity(r,"WTE",y) = 0.8;
+TotalAnnualMaxCapacityInvestment(r,'WTE',y) = 0.008;
 
 # Characterize BIOMASS technology
 OperationalLife(r,'BIO') = 25;
@@ -112,18 +110,18 @@ CapitalCost(r,'BIO',YEAR)$(yRange1(YEAR)) = 2157-5*ord(YEAR);
 CapitalCost(r,'BIO',YEAR)$(yRange2(YEAR)) = 2226-9*ord(YEAR);
 CapitalCost(r,'BIO',YEAR)$(yRange3(YEAR)) = 2204-8*ord(YEAR);
 CapitalCost(r,'BIO',YEAR)$(yRange4(YEAR)) = 1917;
-VariableCost(r,'BIO',m,YEAR)$(yRange0(YEAR)) = 200.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange1(YEAR)) = 200.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange2(YEAR)) = 200.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange3(YEAR)) = 200.56;
-VariableCost(r,'BIO',m,YEAR)$(yRange4(YEAR)) = 200.56;
+VariableCost(r,'BIO',m,YEAR)$(yRange0(YEAR)) = 100;
+VariableCost(r,'BIO',m,YEAR)$(yRange1(YEAR)) = 100;
+VariableCost(r,'BIO',m,YEAR)$(yRange2(YEAR)) = 100;
+VariableCost(r,'BIO',m,YEAR)$(yRange3(YEAR)) = 100;
+VariableCost(r,'BIO',m,YEAR)$(yRange4(YEAR)) = 100;
 FixedCost(r,'BIO',YEAR)$(yRange0(YEAR)) = 28.81;
 FixedCost(r,'BIO',YEAR)$(yRange1(YEAR)) = 31.06-0.45*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange2(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange3(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange4(YEAR)) = 23.31;
-ResidualCapacity(r,"BIO",y) = 4;
-TotalAnnualMaxCapacityInvestment(r,'BIO',y) = 0.04;
+ResidualCapacity(r,"BIO",y) = 3.2;
+TotalAnnualMaxCapacityInvestment(r,'BIO',y) = 0.032;
 TotalAnnualMaxCapacityInvestment(r,'BIO',YEAR)$(yCurrent(YEAR)) = 0;
 
 # Characterize GEOTHERMAL technology
@@ -229,61 +227,10 @@ FixedCost(r,'GPP',YEAR)$(yRange2(YEAR)) = 15;
 FixedCost(r,'GPP',YEAR)$(yRange3(YEAR)) = 15;
 FixedCost(r,'GPP',YEAR)$(yRange4(YEAR)) = 15;
 ResidualCapacity(r,"GPP",YEAR)$(not yNoCO2(YEAR)) = 17.85-0.51*ord(YEAR);
-ResidualCapacity(r,"GPP",YEAR)$(yCurrent(YEAR)) = 14;
+ResidualCapacity(r,"GPP",YEAR)$(yCurrent(YEAR)) = 13.7;
 ResidualCapacity(r,"GPP",YEAR)$(yNoCO2(YEAR)) = 0;
-TotalAnnualMaxCapacityInvestment(r,'GPP',YEAR)$(not yNoCO2(YEAR)) = 0.14;
+TotalAnnualMaxCapacityInvestment(r,'GPP',YEAR)$(not yNoCO2(YEAR)) = 0.137;
 TotalAnnualMaxCapacityInvestment(r,'GPP',YEAR)$(yNoCO2(YEAR)) = 0;
-
-# Characterize OCGT technology
-OperationalLife(r,'OCGT') = 30;
-AvailabilityFactor(r,'OCGT',y) = 0.75;
-CapitalCost(r,'OCGT',YEAR)$(yRange0(YEAR)) = 720;
-CapitalCost(r,'OCGT',YEAR)$(yRange1(YEAR)) = 735-3*ord(YEAR);
-CapitalCost(r,'OCGT',YEAR)$(yRange2(YEAR)) = 735-3*ord(YEAR);
-CapitalCost(r,'OCGT',YEAR)$(yRange3(YEAR)) = 710-2*ord(YEAR);
-CapitalCost(r,'OCGT',YEAR)$(yRange4(YEAR)) = 640;
-VariableCost(r,'OCGT',m,YEAR)$(yRange0(YEAR)) = 2.31;
-VariableCost(r,'OCGT',m,YEAR)$(yRange1(YEAR)) = 2.31;
-VariableCost(r,'OCGT',m,YEAR)$(yRange2(YEAR)) = 2.31;
-VariableCost(r,'OCGT',m,YEAR)$(yRange3(YEAR)) = 2.31;
-VariableCost(r,'OCGT',m,YEAR)$(yRange4(YEAR)) = 2.31;
-FixedCost(r,'OCGT',YEAR)$(yRange0(YEAR)) = 15;
-FixedCost(r,'OCGT',YEAR)$(yRange1(YEAR)) = 15;
-FixedCost(r,'OCGT',YEAR)$(yRange2(YEAR)) = 15;
-FixedCost(r,'OCGT',YEAR)$(yRange3(YEAR)) = 15;
-FixedCost(r,'OCGT',YEAR)$(yRange4(YEAR)) = 15;
-ResidualCapacity(r,"OCGT",y) = 0;
-TotalAnnualMaxCapacityInvestment(r,'OCGT',y) = 0;
-
-# Characterize CCGT technology
-OperationalLife(r,'CCGT') = 30;
-AvailabilityFactor(r,'CCGT',y) = 0.85;
-CapitalCost(r,'CCGT',YEAR)$(yRange0(YEAR)) = 720;
-CapitalCost(r,'CCGT',YEAR)$(yRange1(YEAR)) = 735-3*ord(YEAR);
-CapitalCost(r,'CCGT',YEAR)$(yRange2(YEAR)) = 735-3*ord(YEAR);
-CapitalCost(r,'CCGT',YEAR)$(yRange3(YEAR)) = 710-2*ord(YEAR);
-CapitalCost(r,'CCGT',YEAR)$(yRange4(YEAR)) = 640;
-VariableCost(r,'CCGT',m,YEAR)$(yRange0(YEAR)) = 2.31;
-VariableCost(r,'CCGT',m,YEAR)$(yRange1(YEAR)) = 2.31;
-VariableCost(r,'CCGT',m,YEAR)$(yRange2(YEAR)) = 2.31;
-VariableCost(r,'CCGT',m,YEAR)$(yRange3(YEAR)) = 2.31;
-VariableCost(r,'CCGT',m,YEAR)$(yRange4(YEAR)) = 2.31;
-FixedCost(r,'CCGT',YEAR)$(yRange0(YEAR)) = 15;
-FixedCost(r,'CCGT',YEAR)$(yRange1(YEAR)) = 15;
-FixedCost(r,'CCGT',YEAR)$(yRange2(YEAR)) = 15;
-FixedCost(r,'CCGT',YEAR)$(yRange3(YEAR)) = 15;
-FixedCost(r,'CCGT',YEAR)$(yRange4(YEAR)) = 15;
-ResidualCapacity(r,"CCGT",y) = 0;
-TotalAnnualMaxCapacityInvestment(r,'CCGT',y) = 0;
-
-# Characterize COGENERATION technology
-OperationalLife(r,'CHP') = 40;
-AvailabilityFactor(r,'CHP',y) = 0.85;
-CapitalCost(r,'CHP',y) = 2000;
-VariableCost(r,'CHP',m,y) = 1e-5;
-FixedCost(r,'CHP',y) = 0;
-ResidualCapacity(r,"CHP",y) = 0;
-TotalAnnualMaxCapacityInvestment(r,'CHP',y) = 0;
 
 # Characterize OIL technology
 OperationalLife(r,'OIL_GEN') = 40;
@@ -303,10 +250,10 @@ FixedCost(r,'OIL_GEN',YEAR)$(yRange1(YEAR)) = 20.71;
 FixedCost(r,'OIL_GEN',YEAR)$(yRange2(YEAR)) = 20.71;
 FixedCost(r,'OIL_GEN',YEAR)$(yRange3(YEAR)) = 20.71;
 FixedCost(r,'OIL_GEN',YEAR)$(yRange4(YEAR)) = 20.71;
-ResidualCapacity(r,"OIL_GEN",YEAR)$(not yNoCO2(YEAR)) = 2.6-0.074*ord(YEAR);
-ResidualCapacity(r,"OIL_GEN",YEAR)$(not yCurrent(YEAR)) = 2;
+ResidualCapacity(r,"OIL_GEN",YEAR)$(not yNoCO2(YEAR)) = 1.8-0.05*ord(YEAR);
+ResidualCapacity(r,"OIL_GEN",YEAR)$(not yCurrent(YEAR)) = 1.45;
 ResidualCapacity(r,"OIL_GEN",YEAR)$(yNoCO2(YEAR)) = 0;
-TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',YEAR)$(not yNoCO2(YEAR)) = 0.02;
+TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',YEAR)$(not yNoCO2(YEAR)) = 0.018;
 TotalAnnualMaxCapacityInvestment(r,'OIL_GEN',YEAR)$(yNoCO2(YEAR)) = 0;
 
 ** ----------------------------------------------------------------
@@ -321,7 +268,7 @@ OutputActivityRatio(r,'WPP','ELC',"1",y) = 1;
 InputActivityRatio(r,'WTE','WST',"1",y) = 1/0.25; 
 OutputActivityRatio(r,'WTE','ELC',"1",y) = 1;
 
-InputActivityRatio(r,'BIO','WBM',"1",y) = 1/0.9;
+InputActivityRatio(r,'BIO','WBM',"1",y) = 1/0.25;
 OutputActivityRatio(r,'BIO','ELC',"1",y) = 1;
 
 InputActivityRatio(r,'GEO','GTH',"1",y) = 1;
@@ -336,25 +283,10 @@ OutputActivityRatio(r,'ROR','ELC',"1",y) = 1;
 InputActivityRatio(r,'ROM','HYDMEL',"1",y) = 1;
 OutputActivityRatio(r,'ROM','ELC',"1",y) = 1;
 
-** open cycle gas turbines
-InputActivityRatio(r,'OCGT','GAS',"1",y) = 1/0.35;
-OutputActivityRatio(r,'OCGT','ELC',"1",y) = 1;
-
-** cogeneration power plants produce electricity and heat
-InputActivityRatio(r,'CHP','GAS',"1",y) = 1/0.6;
-OutputActivityRatio(r,'CHP','ELC',"1",y) = 1;
-
-** CCGT can also function as OCGT
-InputActivityRatio(r,'CCGT','GAS',"1",y) = 1/0.6;
-InputActivityRatio(r,'CCGT','GAS',"2",y) = 1/0.3;
-OutputActivityRatio(r,'CCGT','ELC',"1",y) = 1;
-OutputActivityRatio(r,'CCGT','ELC',"2",y) = 1;
-
-** oil power plants
-InputActivityRatio(r,'OIL_GEN','OIL',"1",y) = 1/0.5;
+InputActivityRatio(r,'OIL_GEN','OIL',"1",y) = 1/0.4;
 OutputActivityRatio(r,'OIL_GEN','ELC',"1",y) = 1;
 
-InputActivityRatio(r,'GPP','GAS',"1",y) = 1/0.6;
+InputActivityRatio(r,'GPP','GAS',"1",y) = 1/0.55;
 OutputActivityRatio(r,'GPP','ELC',"1",y) = 1;
 
 $endif.ph

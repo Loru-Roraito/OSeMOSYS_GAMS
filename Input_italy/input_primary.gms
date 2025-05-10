@@ -113,9 +113,7 @@ VariableCost(r,'IMPBIO1',m,YEAR)$(yRange4(YEAR)) = 18.32;
 FixedCost(r,'IMPBIO1',y) = 0;
 OperationalLife(r,'IMPBIO1') = 999;
 AvailabilityFactor(r,'IMPBIO1',y) = 1;
-EmissionActivityRatio(r,'IMPGAS1','CO2','1',y) = 0.127;
 ResidualCapacity(r,"IMPBIO1",y) = 999;
-
 
 CapitalCost(r,'PRODWST',y) = 0;
 VariableCost(r,'PRODWST',m,y) = 0; 
@@ -123,6 +121,7 @@ FixedCost(r,'PRODWST',y) = 0;
 OperationalLife(r,'PRODWST') = 999;
 AvailabilityFactor(r,'PRODWST',y) = 1;
 ResidualCapacity(r,"PRODWST",y) = 999;
+EmissionActivityRatio(r,'PRODWST','CO2','1',y) = 1.16;
 
 CapitalCost(r,'VIR_SUN',y) = 0;
 VariableCost(r,'VIR_SUN',m,y) = 0; 

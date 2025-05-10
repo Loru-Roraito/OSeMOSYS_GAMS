@@ -6,7 +6,7 @@ $setglobal custom "base"
 *$setglobal custom "nonmelt"
 $setglobal storage 1
 $setglobal yearstart 2015
-$setglobal yearend 2100
+$setglobal yearend 2060
 $setglobal initialvolume 19*12.07/0.9 #km3 ice volume in the glaciers * factor for the glacier model
 $setglobal rains 20.8 # km3 rainfall/rivers that go into the dams unrelated to ice melt
 $setglobal dampercentage 0.9 #melting ice that goes to the dams
@@ -44,9 +44,9 @@ yRange0(YEAR) = yes$(YEAR.val >= 2015 and YEAR.val <= 2020);
 yRange1(YEAR) = yes$(YEAR.val >= 2020 and YEAR.val <= 2030);
 yRange2(YEAR) = yes$(YEAR.val >= 2030 and YEAR.val <= 2040);
 yRange3(YEAR) = yes$(YEAR.val >= 2040 and YEAR.val <= 2050);
-yRange4(YEAR) = yes$(YEAR.val >= 2050 and YEAR.val <= 2100);
-yNoCoal(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2100);
-yNoCO2(YEAR)  = yes$(YEAR.val >= 2050 and YEAR.val <= 2100);
+yRange4(YEAR) = yes$(YEAR.val >= 2050 and YEAR.val <= 2060);
+yNoCoal(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2060);
+yNoCO2(YEAR)  = yes$(YEAR.val >= 2050 and YEAR.val <= 2060);
 yCurrent(YEAR)= yes$(YEAR.val >= 2015 and YEAR.val <= 2023);
 
 melting_rate(y) = %initialvolume%*0.0164*exp(-0.0164*ord(y));

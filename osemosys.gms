@@ -45,18 +45,6 @@ option mip = copt;
 option lp = conopt;
 osemosys.optfile = 1;
 
-* first, solve the model without any constraints
-$ifthen.solvermode set mip
-solve osemosys minimizing z using mip;
-$else.solvermode
-solve osemosys minimizing z using lp;
-$endif.solvermode
-
-$include "Model/osemosys_res.gms"
-*$include "Model/report.gms"
-$if not set storage execute_unload 'Results/results_SCENbase_DATA%data%_%custom%_STORno.gdx';
-$if set storage execute_unload 'Results/results_SCENbase_DATA%data%_%custom%_STORyes.gdx';
-
 $ifthen.scen %scen%=="ctax" 
 EmissionsPenalty(r,'CO2',y) = %value%;
 $elseif.scen %scen%=="ctaxchanging" 
