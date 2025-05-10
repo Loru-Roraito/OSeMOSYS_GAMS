@@ -3,16 +3,15 @@
 #UPDATE: split demand into seasons. Update hydrogen. No imposed emission reduction
 
 $setglobal custom "base"
-*$setglobal custom "nonmelt"
 $setglobal storage 1
 $setglobal yearstart 2015
 $setglobal yearend 2060
-$setglobal initialvolume 19*12.07/0.9 #km3 ice volume in the glaciers * factor for the glacier model
-$setglobal rains 20.8 # km3 rainfall/rivers that go into the dams unrelated to ice melt
-$setglobal dampercentage 0.9 #melting ice that goes to the dams
-$setglobal riverpercentage 0.1 #melting ice that goes to the rivers
+$setglobal initialvolume 100 #ice volume in the glaciers
+$setglobal rains 31.72 # km3 rainfall/rivers that go into the dams unrelated to ice melt
+$setglobal dampercentage 0.5 * 6.6 #melting ice that goes to the dams, 6.6 considering melting
+$setglobal riverpercentage 0.3 * 6.6 #melting ice that goes to the rivers
 $setglobal initialstorage 13.5 #km3 water in dams
-$setglobal maxdamextraction 24.5 #km3 water that can be extracted from the dams
+$setglobal maxdamextraction 37 #km3 water that can be extracted from the dams
 $setglobal scen "ctaxchanging" # set actual curve in osemosys.gms
 
 *------------------------------------------------------------------------	
@@ -28,7 +27,6 @@ set     DAYTYPE / 1 /;
 set     DAILYTIMEBRACKET / 1, 2 /;
 
 parameter melting_rate(YEAR);
-parameter forming_rate(YEAR);
 parameter rains(YEAR); #km3
 
 Set yRange0(YEAR);
@@ -50,12 +48,6 @@ yNoCO2(YEAR)  = yes$(YEAR.val >= 2050 and YEAR.val <= 2060);
 yCurrent(YEAR)= yes$(YEAR.val >= 2015 and YEAR.val <= 2023);
 
 melting_rate(y) = %initialvolume%*0.0164*exp(-0.0164*ord(y));
-forming_rate(y) = 0;
-
-** nonmelt
-*rains(y) = %initialrains%;
-*melting_rate(y) = (%maxdamextraction% - rains(y))/%dampercentage%;
-*forming_rate(y) = melting_rate(y);
 
 # characterize technologies 
 set power_plants(TECHNOLOGY);

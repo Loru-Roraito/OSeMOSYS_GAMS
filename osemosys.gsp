@@ -117,13 +117,6 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
-            "file": "Results/results_SCENbase_DATAitaly_nonmelt_STORyes.gdx",
-            "name": "results_SCENbase_DATAitaly_nonmelt_STORyes.gdx",
-            "type": "gdx"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
             "file": "Results/results_SCENctaxchanging_DATAitaly_base_STORyes.gdx",
             "name": "results_SCENctaxchanging_DATAitaly_base_STORyes.gdx",
             "type": "gdx"
