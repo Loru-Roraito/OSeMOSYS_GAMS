@@ -11,9 +11,9 @@ set     TECHNOLOGY      /
 
 set    FUEL            /
         ED 'Demand for electricity'
-        IM 'Ice demand'
-        DI 'glacier input'
-        RD 'rain input'/;
+        IM 'Ice melting demand'
+        DI 'dam input from glaciers'
+        RD 'rain to dams'/;
 
 $elseif.ph %phase%=='data' 
 *------------------------------------------------------------------------	
@@ -22,8 +22,8 @@ $elseif.ph %phase%=='data'
 scalar el_2015;
 el_2015 = 282.200; #TWh
 
-AccumulatedAnnualDemand(r,"ED",y) = el_2015 + el_2015*0.02*(ord(y)-1) - el_2015*0.02*8; #TWh
-AccumulatedAnnualDemand(r,"ED",YEAR)$(ycurrent(YEAR)) = el_2015; #TWh
+SpecifiedAnnualDemand(r,"ED",y) = el_2015 + el_2015*0.02*(ord(y)-1) - el_2015*0.02*8; #TWh
+SpecifiedAnnualDemand(r,"ED",YEAR)$(ycurrent(YEAR)) = el_2015; #TWh
 
 SpecifiedAnnualDemand(r,"IM",y) = melting_rate(y);
 AccumulatedAnnualDemand(r,"RD",y) = %rains%;
@@ -36,6 +36,12 @@ parameter SpecifiedDemandProfile(r,f,l,y)/
   ITALY.IM.SN.(%yearstart%*%yearend%)  .20
   ITALY.IM.WD.(%yearstart%*%yearend%)  .10
   ITALY.IM.WN.(%yearstart%*%yearend%)  .10
+  ITALY.ED.ID.(%yearstart%*%yearend%)  0.30
+  ITALY.ED.IN.(%yearstart%*%yearend%)  0.15
+  ITALY.ED.SD.(%yearstart%*%yearend%)  0.20
+  ITALY.ED.SN.(%yearstart%*%yearend%)  0.10
+  ITALY.ED.WD.(%yearstart%*%yearend%)  0.17
+  ITALY.ED.WN.(%yearstart%*%yearend%)  0.08
 /;
 
 

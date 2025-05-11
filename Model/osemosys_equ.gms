@@ -244,6 +244,10 @@ equation S5_StorageLeveYearStart(REGION,STORAGE,YEAR);
 S5_StorageLeveYearStart(r,s,y)$(ord(y) > 1)..
     StorageLevelYearStart(r,s,y-1) + sum((ls,ld,lh), NetChargeWithinYear(r,s,ls,ld,lh,y-1)) =e= StorageLevelYearStart(r,s,y);
 
+equation SS_StorageLevelYearStart(REGION,STORAGE,YEAR);
+SS_StorageLevelYearStart(r,s,y)..
+    StorageLevelYearStart(r,s,y) =g= MinStorageChargeYear(r,s,y)*StorageUpperLimit(r,s,y);
+
 
 equation S7_StorageLevelYearFinish(REGION,STORAGE,YEAR);
 S7_StorageLevelYearFinish(r,s,y)$(ord(y) < card(yy))..

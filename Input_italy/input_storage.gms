@@ -3,39 +3,102 @@ $set phase %1
 ** ------------------------------------------------
 $ifthen.ph %phase%=='sets'
 
-set     STORAGE / DAM, HYDROGEN, GLACIERS /;
+set     STORAGE / BATTERY, DAM, HYDROGEN, GLACIERS /;
 
-SET TECHNOLOGY /HEL   "Hydrogen Electrolyzers",
+SET TECHNOLOGY /HEL_IN   "Hydrogen Electrolyzers",
+                HEL_OUT  "Hydrogen Electrolyzers",
+                BAT_IN  "Batteries",
+                BAT_OUT "Batteries",
                 PUMP_HYDRO 'Pumped storage (IN)',
                 STOR_HYDRO 'Pumped storage (OUT)',
                 INPUT_HYDRO 'Hydro input',
                 WATER_HYDRO 'Water storage',
+                NET_HYDRO 'Net hydro',
                 ICE_MELT   'Glacier melting'/;
 
-set storage_plants(TECHNOLOGY) / HEL, PUMP_HYDRO, STOR_HYDRO, INPUT_HYDRO, WATER_HYDRO, ICE_MELT /;
+set storage_plants(TECHNOLOGY) / HEL_IN, HEL_OUT, BAT_IN, BAT_OUT, PUMP_HYDRO, STOR_HYDRO, INPUT_HYDRO, WATER_HYDRO, ICE_MELT /;
+parameter MinStorageChargeYear(r,s,y) / /;
 
 ** ------------------------------------------------
 $elseif.ph %phase%=='data' 
 
 # Characterize ELECTROLIZERS
-AvailabilityFactor(r,'HEL',y) = 0.9;
-OperationalLife(r,'HEL') = 10;
-CapitalCost(r,'HEL',YEAR)$(yRange0(YEAR)) = 1188;
-CapitalCost(r,'HEL',YEAR)$(yRange1(YEAR)) = 1432-49*ord(YEAR);
-CapitalCost(r,'HEL',YEAR)$(yRange2(YEAR)) = 1180-32*ord(YEAR);
-CapitalCost(r,'HEL',YEAR)$(yRange3(YEAR)) = 552-7*ord(YEAR);
-CapitalCost(r,'HEL',YEAR)$(yRange4(YEAR)) = 314;
-VariableCost(r,'HEL',m,YEAR)$(yRange0(YEAR)) = 1e-5;
-VariableCost(r,'HEL',m,YEAR)$(yRange1(YEAR)) = 1e-5;
-VariableCost(r,'HEL',m,YEAR)$(yRange2(YEAR)) = 1e-5;
-VariableCost(r,'HEL',m,YEAR)$(yRange3(YEAR)) = 1e-5;
-VariableCost(r,'HEL',m,YEAR)$(yRange4(YEAR)) = 1e-5;
-FixedCost(r,'HEL',YEAR)$(yRange0(YEAR)) = 47.52;
-FixedCost(r,'HEL',YEAR)$(yRange1(YEAR)) = 57.26-1.95*ord(YEAR);
-FixedCost(r,'HEL',YEAR)$(yRange2(YEAR)) = 39.65-0.77*ord(YEAR);
-FixedCost(r,'HEL',YEAR)$(yRange3(YEAR)) = 39.65-0.77*ord(YEAR);
-FixedCost(r,'HEL',YEAR)$(yRange4(YEAR)) = 12.56;
-ResidualCapacity(r,'HEL',y) = 999;
+AvailabilityFactor(r,'HEL_IN',y) = 0.9;
+OperationalLife(r,'HEL_IN') = 10;
+CapitalCost(r,'HEL_IN',YEAR)$(yRange0(YEAR)) = 1188;
+CapitalCost(r,'HEL_IN',YEAR)$(yRange1(YEAR)) = 1432-49*ord(YEAR);
+CapitalCost(r,'HEL_IN',YEAR)$(yRange2(YEAR)) = 1180-32*ord(YEAR);
+CapitalCost(r,'HEL_IN',YEAR)$(yRange3(YEAR)) = 552-7*ord(YEAR);
+CapitalCost(r,'HEL_IN',YEAR)$(yRange4(YEAR)) = 314;
+VariableCost(r,'HEL_IN',m,YEAR)$(yRange0(YEAR)) = 1e-5;
+VariableCost(r,'HEL_IN',m,YEAR)$(yRange1(YEAR)) = 1e-5;
+VariableCost(r,'HEL_IN',m,YEAR)$(yRange2(YEAR)) = 1e-5;
+VariableCost(r,'HEL_IN',m,YEAR)$(yRange3(YEAR)) = 1e-5;
+VariableCost(r,'HEL_IN',m,YEAR)$(yRange4(YEAR)) = 1e-5;
+FixedCost(r,'HEL_IN',YEAR)$(yRange0(YEAR)) = 47.52;
+FixedCost(r,'HEL_IN',YEAR)$(yRange1(YEAR)) = 57.26-1.95*ord(YEAR);
+FixedCost(r,'HEL_IN',YEAR)$(yRange2(YEAR)) = 39.65-0.77*ord(YEAR);
+FixedCost(r,'HEL_IN',YEAR)$(yRange3(YEAR)) = 39.65-0.77*ord(YEAR);
+FixedCost(r,'HEL_IN',YEAR)$(yRange4(YEAR)) = 12.56;
+ResidualCapacity(r,'HEL_IN',y) = 5;
+
+# Characterize ELECTROLIZERS
+AvailabilityFactor(r,'HEL_OUT',y) = 0.9;
+OperationalLife(r,'HEL_OUT') = 10;
+CapitalCost(r,'HEL_OUT',YEAR)$(yRange0(YEAR)) = 1188;
+CapitalCost(r,'HEL_OUT',YEAR)$(yRange1(YEAR)) = 1432-49*ord(YEAR);
+CapitalCost(r,'HEL_OUT',YEAR)$(yRange2(YEAR)) = 1180-32*ord(YEAR);
+CapitalCost(r,'HEL_OUT',YEAR)$(yRange3(YEAR)) = 552-7*ord(YEAR);
+CapitalCost(r,'HEL_OUT',YEAR)$(yRange4(YEAR)) = 314;
+VariableCost(r,'HEL_OUT',m,YEAR)$(yRange0(YEAR)) = 1e-5;
+VariableCost(r,'HEL_OUT',m,YEAR)$(yRange1(YEAR)) = 1e-5;
+VariableCost(r,'HEL_OUT',m,YEAR)$(yRange2(YEAR)) = 1e-5;
+VariableCost(r,'HEL_OUT',m,YEAR)$(yRange3(YEAR)) = 1e-5;
+VariableCost(r,'HEL_OUT',m,YEAR)$(yRange4(YEAR)) = 1e-5;
+FixedCost(r,'HEL_OUT',YEAR)$(yRange0(YEAR)) = 47.52;
+FixedCost(r,'HEL_OUT',YEAR)$(yRange1(YEAR)) = 57.26-1.95*ord(YEAR);
+FixedCost(r,'HEL_OUT',YEAR)$(yRange2(YEAR)) = 39.65-0.77*ord(YEAR);
+FixedCost(r,'HEL_OUT',YEAR)$(yRange3(YEAR)) = 39.65-0.77*ord(YEAR);
+FixedCost(r,'HEL_OUT',YEAR)$(yRange4(YEAR)) = 12.56;
+ResidualCapacity(r,'HEL_OUT',y) = 5;
+
+AvailabilityFactor(r,'BAT_IN',y) = 0.95;
+OperationalLife(r,'BAT_IN') = 15;
+CapitalCost(r,'BAT_IN',YEAR)$(yRange0(YEAR)) = 400;
+CapitalCost(r,'BAT_IN',YEAR)$(yRange1(YEAR)) = 425 - 5*ord(YEAR);
+CapitalCost(r,'BAT_IN',YEAR)$(yRange2(YEAR)) = 410 - 4*ord(YEAR);
+CapitalCost(r,'BAT_IN',YEAR)$(yRange3(YEAR)) = 360 - 2*ord(YEAR);
+CapitalCost(r,'BAT_IN',YEAR)$(yRange4(YEAR)) = 290;
+VariableCost(r,'BAT_IN',m,YEAR)$(yRange0(YEAR)) = 1e-5;
+VariableCost(r,'BAT_IN',m,YEAR)$(yRange1(YEAR)) = 1e-5;
+VariableCost(r,'BAT_IN',m,YEAR)$(yRange2(YEAR)) = 1e-5;
+VariableCost(r,'BAT_IN',m,YEAR)$(yRange3(YEAR)) = 1e-5;
+VariableCost(r,'BAT_IN',m,YEAR)$(yRange4(YEAR)) = 1e-5;
+FixedCost(r,'BAT_IN',YEAR)$(yRange0(YEAR)) = 10.0;
+FixedCost(r,'BAT_IN',YEAR)$(yRange1(YEAR)) = 11 - 0.2*ord(YEAR);
+FixedCost(r,'BAT_IN',YEAR)$(yRange2(YEAR)) = 10.25 - 0.15*ord(YEAR);
+FixedCost(r,'BAT_IN',YEAR)$(yRange3(YEAR)) = 8.7 - 0.1*ord(YEAR);
+FixedCost(r,'BAT_IN',YEAR)$(yRange4(YEAR)) = 5.2;
+ResidualCapacity(r,'BAT_IN',y) = 1;
+
+AvailabilityFactor(r,'BAT_OUT',y) = 0.95;
+OperationalLife(r,'BAT_OUT') = 15;
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange0(YEAR)) = 400;
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange1(YEAR)) = 425 - 5*ord(YEAR);
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange2(YEAR)) = 410 - 4*ord(YEAR);
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange3(YEAR)) = 360 - 2*ord(YEAR);
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange4(YEAR)) = 290;
+VariableCost(r,'BAT_OUT',m,YEAR)$(yRange0(YEAR)) = 1e-5;
+VariableCost(r,'BAT_OUT',m,YEAR)$(yRange1(YEAR)) = 1e-5;
+VariableCost(r,'BAT_OUT',m,YEAR)$(yRange2(YEAR)) = 1e-5;
+VariableCost(r,'BAT_OUT',m,YEAR)$(yRange3(YEAR)) = 1e-5;
+VariableCost(r,'BAT_OUT',m,YEAR)$(yRange4(YEAR)) = 1e-5;
+FixedCost(r,'BAT_OUT',YEAR)$(yRange0(YEAR)) = 10.0;
+FixedCost(r,'BAT_OUT',YEAR)$(yRange1(YEAR)) = 11 - 0.2*ord(YEAR);
+FixedCost(r,'BAT_OUT',YEAR)$(yRange2(YEAR)) = 10.25 - 0.15*ord(YEAR);
+FixedCost(r,'BAT_OUT',YEAR)$(yRange3(YEAR)) = 8.7 - 0.1*ord(YEAR);
+FixedCost(r,'BAT_OUT',YEAR)$(yRange4(YEAR)) = 5.2;
+ResidualCapacity(r,'BAT_OUT',y) = 1;
 
 # characterize dam hydro storage
 CapacityFactor(r,'PUMP_HYDRO',"ID",y) = 0.7;
@@ -51,17 +114,12 @@ OperationalLife(r,'PUMP_HYDRO') = 60;
 ResidualCapacity(r,'PUMP_HYDRO',y) = 0.053;
 TotalAnnualMaxCapacityInvestment(r,'PUMP_HYDRO',y) = 0;
 
-CapacityFactor(r,'STOR_HYDRO',"ID",y) = 0.7;
-CapacityFactor(r,'STOR_HYDRO',"IN",y) = 0.7;
-CapacityFactor(r,'STOR_HYDRO',"SD",y) = 0.3;
-CapacityFactor(r,'STOR_HYDRO',"SN",y) = 0.3;
-CapacityFactor(r,'STOR_HYDRO',"WD",y) = 0.5;
-CapacityFactor(r,'STOR_HYDRO',"WN",y) = 0.5;
+AvailabilityFactor(r,'STOR_HYDRO',y) = 1;
 CapitalCost(r,'STOR_HYDRO',y) = 1000;
 VariableCost(r,'STOR_HYDRO',m,y) = 1e-5;
 FixedCost(r,'STOR_HYDRO',y) = 1e-5;
 OperationalLife(r,'STOR_HYDRO') = 60;
-ResidualCapacity(r,'STOR_HYDRO',y) = %maxdamextraction%/0.55;
+ResidualCapacity(r,'STOR_HYDRO',y) = %maxdamextraction%;
 TotalAnnualMaxCapacityInvestment(r,'STOR_HYDRO',y) = 0;
 
 AvailabilityFactor(r,'INPUT_HYDRO',y) = 1;
@@ -93,25 +151,33 @@ OperationalLife(r,'ICE_MELT') = 999;
 ResidualCapacity(r,'ICE_MELT',y) = 999;
 TotalAnnualMaxCapacityInvestment(r,'ICE_MELT',y) = 0;
 
-CapitalCostStorage(r,'HYDROGEN',y) = 100;
+CapitalCostStorage(r,'HYDROGEN',y) = 500;
 ResidualStorageCapacity(r,'HYDROGEN',y) = 10;
-StorageLevelStart(r,'HYDROGEN') = 0;
+StorageLevelStart(r,'HYDROGEN') = 5; # thousand tons
 
-CapitalCostStorage(r,'DAM',y) = 99999999; # UPDATE
+CapitalCostStorage(r,'DAM',y) = 999;
 ResidualStorageCapacity(r,'DAM',y) = %initialstorage%;
 StorageLevelStart(r,'DAM') = 10;
+MinStorageChargeYear(r,'DAM',y) = 0.25;
 
 CapitalCostStorage(r,'GLACIERS',y) = 100;
 ResidualStorageCapacity(r,'GLACIERS',y) = 999;
 StorageLevelStart(r,'GLACIERS') = %initialvolume%;
+
+CapitalCostStorage(r,'BATTERY',y) = 300;
+ResidualStorageCapacity(r,'BATTERY',y) = 0.004;
+StorageLevelStart(r,'BATTERY') = 0.002;
 
 
 ** ------------------------------------------------
 $elseif.ph %phase%=='popol'
 
 
-InputActivityRatio(r,'HEL','ELC',"1",y) = 1;
-OutputActivityRatio(r,'HEL','ELC',"2",y) = 0.6;
+InputActivityRatio(r,'HEL_IN','ELC',"1",y) = 1/0.6 * 0.02;
+OutputActivityRatio(r,'HEL_OUT','ELC',"2",y) = 1 * 0.02;
+
+InputActivityRatio(r,'BAT_IN','ELC',"1",y) = 1/0.9;
+OutputActivityRatio(r,'BAT_OUT','ELC',"2",y) = 1;
 
 InputActivityRatio(r,'INPUT_HYDRO','HYD',"1",y) = 1;
 OutputActivityRatio(r,'INPUT_HYDRO','WAT_IN',"1",y) = 1;
@@ -126,8 +192,11 @@ OutputActivityRatio(r,'ICE_MELT','ICE_MEL',"2",y) = 1;
 OutputActivityRatio(r,'ICE_MELT','HYDMEL',"2",y) = %riverpercentage%;
 OutputActivityRatio(r,'ICE_MELT','DAMMEL',"2",y) = %dampercentage%;
 
-TechnologyToStorage(r,"1",'HEL','HYDROGEN') = 1;
-TechnologyFromStorage(r,"2",'HEL','HYDROGEN') = 1;
+TechnologyToStorage(r,"1",'HEL_IN','HYDROGEN') = 1;
+TechnologyFromStorage(r,"2",'HEL_OUT','HYDROGEN') = 1;
+
+TechnologyToStorage(r,"1",'BAT_IN','BATTERY') = 1;
+TechnologyFromStorage(r,"2",'BAT_OUT','BATTERY') = 1;
 
 TechnologyToStorage(r,"1",'WATER_HYDRO','DAM') = 1;
 TechnologyToStorage(r,"1",'INPUT_HYDRO','DAM') = 1;

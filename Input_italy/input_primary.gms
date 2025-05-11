@@ -29,14 +29,12 @@ set     FUEL    /
         HYD 'Hydro energy'
         HYDMEL 'Hydro energy (melt)'
         DAMMEL 'Melted ice that goes into dams'
-        ICW 'Ice water'
-        ICE_MEL
-        ICE_PROD
-        WAT_DAM
-        WAT_IN
+        ICE_MEL 'virtual ice melting'
+        WAT_DAM 'virtual water from ice to dams'
+        WAT_IN  'virtual water from rain to dams'
 /;
 
-set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD, HYDMEL, ICW /;
+set renewable_fuel(FUEL) / WBM, GTH, SUN, WIN, HYD, HYDMEL, DAMMEL /;
 
 ** ----------------------------------------------------------------
 $elseif.ph %phase%=='data'
