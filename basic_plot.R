@@ -1,4 +1,4 @@
-#### step 0: load all relevant packages
+#### step 0: load all nt packages
 library(tidyverse)
 library(gdxtools)
 

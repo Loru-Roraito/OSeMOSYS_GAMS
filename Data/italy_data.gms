@@ -11,9 +11,10 @@ $setglobal dampercentage 0.5 * 6.6 #melting ice that goes to the dams, 6.6 consi
 $setglobal riverpercentage 0.3 * 6.6 #melting ice that goes to the rivers
 $setglobal initialstorage 13.5 #km3 water in dams
 $setglobal maxdamextraction 37 #km3 water that can be extracted from the dams
+$setglobal exponent 0.0164 #exponent for the melting rate
 
-$setglobal exponent 0.0164 #exponent for the melting rate (default 0.0164, lower 0.009, upper 0.03)
-$setglobal energygrowth 0.02 # annual growth of the electricity demand (default 0.02, lower 0.01)
+$setglobal divergence 0 #divergence for the melting rate (default 0, low -0.25, high 0.2)
+$setglobal energygrowth 0.02 # annual growth of the electricity demand (default 0.02, low 0.01, high 0.25)
 
 *------------------------------------------------------------------------	
 * Sets       
@@ -46,12 +47,12 @@ yRange2(YEAR) = yes$(YEAR.val >= 2030 and YEAR.val <= 2040);
 yRange3(YEAR) = yes$(YEAR.val >= 2040 and YEAR.val <= 2050);
 yRange4(YEAR) = yes$(YEAR.val >= 2050 and YEAR.val <= 2060);
 yNoCoal(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2060);
-yNoCO2(YEAR)  = yes$(YEAR.val >= 2050 and YEAR.val <= 2060);
+yNoCO2(YEAR)  = yes$(YEAR.val >= 2025 and YEAR.val <= 2060);
 yCurrent(YEAR)= yes$(YEAR.val >= 2015 and YEAR.val <= 2023);
 
-melting_rate(y) = %initialvolume%*%exponent%*exp(-%exponent%*ord(y));
+melting_rate(y) = %initialvolume%*%exponent%*exp(-%exponent%*ord(y)) - (%divergence%);
 correction_factor(y) = 1;
-correction_factor(y) = %initialvolume%*0.0164*exp(-%exponent%*ord(y))/melting_rate(y);
+correction_factor(y) = %exponent%*(%initialvolume%*exp(-%exponent%*ord(y))+(%divergence%)*ord(y))/melting_rate(y);
 
 # characterize technologies 
 set power_plants(TECHNOLOGY);

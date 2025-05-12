@@ -48,8 +48,6 @@ $ifthen.scen %scen%=="ctax"
 EmissionsPenalty(r,'CO2',y) = %value%;
 $elseif.scen %scen%=="ctaxchanging" 
 EmissionsPenalty(r,'CO2',y) = 50-100/(1-100/ord(y));
-$elseif.scen %scen%=="ctaxlinear" 
-EmissionsPenalty(r,'CO2',y) = 50+10*ord(y);
 $elseif.scen %scen%=="emicap" 
 AnnualEmissionLimit(r,'CO2',y)$(ord(y) ge 10) = %value%;
 $elseif.scen %scen%=="nocoal" 
