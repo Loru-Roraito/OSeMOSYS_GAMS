@@ -25,7 +25,8 @@ $onmulti
 $onrecurse
 *$setglobal mip
 $if not set scen $setglobal scen base
-$if not set data $setglobal data template
+$if not set data $setglobal data italy
+$if not set mode $setglobal mode mip
 $if not set value $setglobal value ""
 $if not set custom $setglobal custom "base"
 $setglobal storage

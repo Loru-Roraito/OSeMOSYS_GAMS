@@ -17,7 +17,6 @@ SET TECHNOLOGY /HEL_IN   "Hydrogen Electrolyzers",
                 ICE_MELT   'Glacier melting'/;
 
 set storage_plants(TECHNOLOGY) / HEL_IN, HEL_OUT, BAT_IN, BAT_OUT, PUMP_HYDRO, STOR_HYDRO, INPUT_HYDRO, WATER_HYDRO, ICE_MELT /;
-parameter MinStorageChargeYear(r,s,y) / /;
 
 ** ------------------------------------------------
 $elseif.ph %phase%=='data' 

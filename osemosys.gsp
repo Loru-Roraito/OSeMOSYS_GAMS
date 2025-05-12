@@ -145,13 +145,6 @@
             "file": "osemosys.lst",
             "name": "osemosys.lst",
             "type": "lst"
-        },
-        {
-            "codecMib": 106,
-            "encoding": "UTF-8",
-            "file": "SelResults.CSV",
-            "name": "SelResults.CSV",
-            "type": ""
         }
     ],
     "options": [

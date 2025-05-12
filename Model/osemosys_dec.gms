@@ -426,6 +426,7 @@ parameter ModelPeriodExogenousEmission(REGION,EMISSION);
 * emission generated in the whole modelled region, over the entire
 * modelled period.
 parameter ModelPeriodEmissionLimit(REGION,EMISSION);
+parameter MinStorageChargeYear(REGION,STORAGE,YEAR);
 
 
 
