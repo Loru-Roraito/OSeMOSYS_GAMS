@@ -22,7 +22,7 @@ $elseif.ph %phase%=='data'
 scalar el_2015;
 el_2015 = 282.200; #TWh
 
-SpecifiedAnnualDemand(r,"ED",y) = el_2015 + el_2015*0.02*(ord(y)-1) - el_2015*0.02*8; #TWh
+SpecifiedAnnualDemand(r,"ED",y) = el_2015 + el_2015*%energygrowth%*(ord(y)-1) - el_2015*%energygrowth%*8; #TWh
 SpecifiedAnnualDemand(r,"ED",YEAR)$(ycurrent(YEAR)) = el_2015; #TWh
 
 SpecifiedAnnualDemand(r,"IM",y) = melting_rate(y);

@@ -125,7 +125,7 @@ FixedCost(r,'BIO',YEAR)$(yRange2(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange3(YEAR)) = 25.06-0.05*ord(YEAR);
 FixedCost(r,'BIO',YEAR)$(yRange4(YEAR)) = 23.31;
 ResidualCapacity(r,"BIO",y) = 3.2;
-TotalAnnualMaxCapacityInvestment(r,'BIO',y) = 1.5;
+TotalAnnualMaxCapacityInvestment(r,'BIO',YEAR)$(yCurrent(YEAR)) = 0;
 
 # Characterize GEOTHERMAL technology
 OperationalLife(r,'GEO') = 30;
@@ -147,6 +147,7 @@ FixedCost(r,'GEO',YEAR)$(yRange3(YEAR)) = 92;
 FixedCost(r,'GEO',YEAR)$(yRange4(YEAR)) = 92;
 ResidualCapacity(r,"GEO",y) = 0.82;
 TotalAnnualMaxCapacityInvestment(r,'GEO',y) = 0.082;
+TotalAnnualMaxCapacityInvestment(r,'GEO',YEAR)$(yCurrent(YEAR)) = 0;
 
 # Characterize RUN-OF-RIVER technology
 OperationalLife(r,'ROR') = 55;
@@ -168,6 +169,7 @@ FixedCost(r,'ROR',YEAR)$(yRange3(YEAR)) = 198-0.4*ord(YEAR);
 FixedCost(r,'ROR',YEAR)$(yRange4(YEAR)) = 184;
 ResidualCapacity(r,"ROR",y) = 4.65;
 TotalAnnualMaxCapacityInvestment(r,'ROR',y) = 0.0465;
+TotalAnnualMaxCapacityInvestment(r,'ROR',YEAR)$(yCurrent(YEAR)) = 0;
 
 OperationalLife(r,'ROR_MEL') = 55;
 CapacityFactor(r,'ROR_MEL',"ID",y) = .18*6*0.4/2;
@@ -191,7 +193,7 @@ FixedCost(r,'ROR_MEL',YEAR)$(yRange1(YEAR)) = 210.48;
 FixedCost(r,'ROR_MEL',YEAR)$(yRange2(YEAR)) = 244.2-2.25*ord(YEAR);
 FixedCost(r,'ROR_MEL',YEAR)$(yRange3(YEAR)) = 198-0.4*ord(YEAR);
 FixedCost(r,'ROR_MEL',YEAR)$(yRange4(YEAR)) = 184;
-ResidualCapacity(r,"ROR_MEL",y) = melting_rate(y)*%riverpercentage%/(0.4*24*0.365);
+ResidualCapacity(r,"ROR_MEL",y) = correction_factor(y)*melting_rate(y)*%riverpercentage%/(0.4*24*0.365);
 TotalAnnualMaxCapacityInvestment(r,'ROR_MEL',y) = 0;
 
 # Characterize COAL technology

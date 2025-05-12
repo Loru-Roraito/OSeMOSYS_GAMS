@@ -117,6 +117,20 @@
         {
             "codecMib": 106,
             "encoding": "UTF-8",
+            "file": "Results/results_SCENctaxchanging_DATAitaly_NCLMD2_STORyes.gdx",
+            "name": "results_SCENctaxchanging_DATAitaly_NCLMD2_STORyes.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
+            "file": "Results/results_SCENctaxchanging_DATAitaly_NCMMD2_STORyes.gdx",
+            "name": "results_SCENctaxchanging_DATAitaly_NCMMD2_STORyes.gdx",
+            "type": "gdx"
+        },
+        {
+            "codecMib": 106,
+            "encoding": "UTF-8",
             "file": "osemosys.gms",
             "name": "osemosys.gms",
             "options": [

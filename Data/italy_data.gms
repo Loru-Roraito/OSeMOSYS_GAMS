@@ -1,8 +1,7 @@
 ** configuration options
 
-#UPDATE: split demand into seasons. Update hydrogen. No imposed emission reduction
-
-$setglobal custom "base"
+$setglobal custom "NCMMD2"
+$setglobal scen "ctaxchanging" # set actual curve in osemosys.gms
 $setglobal storage 1
 $setglobal yearstart 2015
 $setglobal yearend 2060
@@ -12,7 +11,9 @@ $setglobal dampercentage 0.5 * 6.6 #melting ice that goes to the dams, 6.6 consi
 $setglobal riverpercentage 0.3 * 6.6 #melting ice that goes to the rivers
 $setglobal initialstorage 13.5 #km3 water in dams
 $setglobal maxdamextraction 37 #km3 water that can be extracted from the dams
-$setglobal scen "ctaxchanging" # set actual curve in osemosys.gms
+
+$setglobal exponent 0.0164 #exponent for the melting rate (default 0.0164, lower 0.009, upper 0.03)
+$setglobal energygrowth 0.02 # annual growth of the electricity demand (default 0.02, lower 0.01)
 
 *------------------------------------------------------------------------	
 * Sets       
@@ -27,6 +28,7 @@ set     DAYTYPE / 1 /;
 set     DAILYTIMEBRACKET / 1, 2 /;
 
 parameter melting_rate(YEAR);
+parameter correction_factor(YEAR);
 parameter rains(YEAR); #km3
 
 Set yRange0(YEAR);
@@ -47,7 +49,9 @@ yNoCoal(YEAR) = yes$(YEAR.val >= 2025 and YEAR.val <= 2060);
 yNoCO2(YEAR)  = yes$(YEAR.val >= 2050 and YEAR.val <= 2060);
 yCurrent(YEAR)= yes$(YEAR.val >= 2015 and YEAR.val <= 2023);
 
-melting_rate(y) = %initialvolume%*0.0164*exp(-0.0164*ord(y));
+melting_rate(y) = %initialvolume%*%exponent%*exp(-%exponent%*ord(y));
+correction_factor(y) = 1;
+correction_factor(y) = %initialvolume%*0.0164*exp(-%exponent%*ord(y))/melting_rate(y);
 
 # characterize technologies 
 set power_plants(TECHNOLOGY);

@@ -8,6 +8,8 @@ myfiles <- list.files(path="Results/.",pattern=".gdx")
 ## 1.2: list all gdx objects (sets, parameters, so on) that you want loaded
 myvars <- c("TotalTechnologyAnnualActivity", "StorageLevelYearStart")
 
+myscenario <- "SCENctaxchanging_DATAitaly_NCUMD2_STORyes"
+
 ## step 1.3: load with batch extract and tidy the dataframe
 results <- batch_extract(myvars,paste0("Results/",myfiles) ) %>%
   bind_rows(.id="variable") %>%
@@ -31,7 +33,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("GLACIERS"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Glaciers") +
   theme_classic() + 
@@ -41,7 +43,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("DAM"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Dams") +
   theme_classic() + 
@@ -51,7 +53,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("HYDROGEN"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Hydrogen") +
   theme_classic() + 
@@ -61,7 +63,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 STORAGE %in% c("BATTERY"), 
                 variable == "StorageLevelYearStart", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = STORAGE), linewidth = 1) +
   ylab("Storage volume per year") + xlab("") + ggtitle("Battery") +
   theme_classic() + 
@@ -71,7 +73,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 TECHNOLOGY  %in% c("ROR_MEL", "STOR_HYDRO", "COAL", "GPP", "ROR", "OIL_GEN", "BIO", "WTE", "GEO", "SPV", "WPP"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("All sources") +
   theme_classic() + 
@@ -81,7 +83,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 TECHNOLOGY  %in% c("ROR", "ROR_MEL", "GEO", "SPV", "WPP", "BIO"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Renewables") +
   theme_classic() + 
@@ -91,7 +93,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 TECHNOLOGY  %in% c("STOR_HYDRO", "ROR", "ROR_MEL"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Hydro") +
   theme_classic() + 
@@ -101,7 +103,7 @@ ggplot(data = results %>%
          filter(REGION == "ITALY", 
                 TECHNOLOGY  %in% c("COAL", "GPP", "OIL_GEN", "WTE"),
                 variable == "TotalTechnologyAnnualActivity", 
-                scenario == "SCENctaxchanging_DATAitaly_base_STORyes")) +
+                scenario == myscenario)) +
   geom_line(aes(x = t, y = value, color = TECHNOLOGY), linewidth = 1) +
   ylab("Energy production per year") + xlab("") + ggtitle("Energy production") +
   theme_classic() + 

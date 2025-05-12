@@ -83,21 +83,21 @@ ResidualCapacity(r,'BAT_IN',y) = 1;
 
 AvailabilityFactor(r,'BAT_OUT',y) = 0.95;
 OperationalLife(r,'BAT_OUT') = 15;
-CapitalCost(r,'BAT_OUT',YEAR)$(yRange0(YEAR)) = 400;
-CapitalCost(r,'BAT_OUT',YEAR)$(yRange1(YEAR)) = 425 - 5*ord(YEAR);
-CapitalCost(r,'BAT_OUT',YEAR)$(yRange2(YEAR)) = 410 - 4*ord(YEAR);
-CapitalCost(r,'BAT_OUT',YEAR)$(yRange3(YEAR)) = 360 - 2*ord(YEAR);
-CapitalCost(r,'BAT_OUT',YEAR)$(yRange4(YEAR)) = 290;
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange0(YEAR)) = 228;
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange1(YEAR)) = 294 - 13*ord(YEAR);
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange2(YEAR)) = 125 - 2*ord(YEAR);
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange3(YEAR)) = 128 - 2*ord(YEAR);
+CapitalCost(r,'BAT_OUT',YEAR)$(yRange4(YEAR)) = 57;
 VariableCost(r,'BAT_OUT',m,YEAR)$(yRange0(YEAR)) = 1e-5;
 VariableCost(r,'BAT_OUT',m,YEAR)$(yRange1(YEAR)) = 1e-5;
 VariableCost(r,'BAT_OUT',m,YEAR)$(yRange2(YEAR)) = 1e-5;
 VariableCost(r,'BAT_OUT',m,YEAR)$(yRange3(YEAR)) = 1e-5;
 VariableCost(r,'BAT_OUT',m,YEAR)$(yRange4(YEAR)) = 1e-5;
-FixedCost(r,'BAT_OUT',YEAR)$(yRange0(YEAR)) = 10.0;
-FixedCost(r,'BAT_OUT',YEAR)$(yRange1(YEAR)) = 11 - 0.2*ord(YEAR);
-FixedCost(r,'BAT_OUT',YEAR)$(yRange2(YEAR)) = 10.25 - 0.15*ord(YEAR);
-FixedCost(r,'BAT_OUT',YEAR)$(yRange3(YEAR)) = 8.7 - 0.1*ord(YEAR);
-FixedCost(r,'BAT_OUT',YEAR)$(yRange4(YEAR)) = 5.2;
+FixedCost(r,'BAT_OUT',YEAR)$(yRange0(YEAR)) = 5.7;
+FixedCost(r,'BAT_OUT',YEAR)$(yRange1(YEAR)) = 7.35 - 0.33*ord(YEAR);
+FixedCost(r,'BAT_OUT',YEAR)$(yRange2(YEAR)) = 3.14 - 0.05*ord(YEAR);
+FixedCost(r,'BAT_OUT',YEAR)$(yRange3(YEAR)) = 3.14 - 0.05*ord(YEAR);
+FixedCost(r,'BAT_OUT',YEAR)$(yRange4(YEAR)) = 1.43;
 ResidualCapacity(r,'BAT_OUT',y) = 1;
 
 # characterize dam hydro storage
@@ -140,7 +140,7 @@ CapitalCost(r,'WATER_HYDRO',y) = 0;
 VariableCost(r,'WATER_HYDRO',m,y) = 0;
 FixedCost(r,'WATER_HYDRO',y) = 0;
 OperationalLife(r,'WATER_HYDRO') = 999;
-ResidualCapacity(r,'WATER_HYDRO',y) = melting_rate(y)*%dampercentage%;
+ResidualCapacity(r,'WATER_HYDRO',y) = correction_factor(y)*melting_rate(y)*%dampercentage%;
 TotalAnnualMaxCapacityInvestment(r,'WATER_HYDRO',y) = 0;
 
 AvailabilityFactor(r,'ICE_MELT',y) = 1;
@@ -189,8 +189,8 @@ InputActivityRatio(r,'PUMP_HYDRO','ELC',"1",y) = (1/0.75) * (30.06 / 37);
 OutputActivityRatio(r,'STOR_HYDRO','ELC',"2",y) = 30.06 / 37;
 
 OutputActivityRatio(r,'ICE_MELT','ICE_MEL',"2",y) = 1;
-OutputActivityRatio(r,'ICE_MELT','HYDMEL',"2",y) = %riverpercentage%;
-OutputActivityRatio(r,'ICE_MELT','DAMMEL',"2",y) = %dampercentage%;
+OutputActivityRatio(r,'ICE_MELT','HYDMEL',"2",y) = correction_factor(y)*%riverpercentage%;
+OutputActivityRatio(r,'ICE_MELT','DAMMEL',"2",y) = correction_factor(y)*%dampercentage%;
 
 TechnologyToStorage(r,"1",'HEL_IN','HYDROGEN') = 1;
 TechnologyFromStorage(r,"2",'HEL_OUT','HYDROGEN') = 1;
@@ -204,6 +204,5 @@ TechnologyToStorage(r,"1",'PUMP_HYDRO','DAM') = 1;
 TechnologyFromStorage(r,"2",'STOR_HYDRO','DAM') = 1;
 
 TechnologyFromStorage(r,"2",'ICE_MELT','GLACIERS') = 1;
-
 
 $endif.ph
